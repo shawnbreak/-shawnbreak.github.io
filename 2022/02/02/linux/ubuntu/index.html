@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="ubuntu 安装windows10 + ubuntu18.04双系统，重启关机卡的问题高亮install ubuntu，然后按 e键，进入grub设置，将quiet splash – 改为 quiet splash nomodeset 安装完后，也可以在引导界面高亮ubuntu然后按e键进入grub设置。 分区ubuntu 分区 120G &#x2F;boot 200M &#x2F; 25G &amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/02/02/linux/ubuntu/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="ubuntu 安装windows10 + ubuntu18.04双系统，重启关机卡的问题高亮install ubuntu，然后按 e键，进入grub设置，将quiet splash – 改为 quiet splash nomodeset 安装完后，也可以在引导界面高亮ubuntu然后按e键进入grub设置。 分区ubuntu 分区 120G &#x2F;boot 200M &#x2F; 25G &amp;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-02T14:05:22.678Z">
+<meta property="article:modified_time" content="2022-02-02T14:05:22.678Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-linux/ubuntu" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/linux/ubuntu/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="ubuntu-安装"><a href="#ubuntu-安装" class="headerlink" title="ubuntu 安装"></a>ubuntu 安装</h1><h3 id="windows10-ubuntu18-04双系统，重启关机卡的问题"><a href="#windows10-ubuntu18-04双系统，重启关机卡的问题" class="headerlink" title="windows10 + ubuntu18.04双系统，重启关机卡的问题"></a>windows10 + ubuntu18.04双系统，重启关机卡的问题</h3><p>高亮install ubuntu，然后按 <code>e</code>键，进入grub设置，将quiet splash – 改为 quiet splash nomodeset</p>
+<p>安装完后，也可以在引导界面高亮ubuntu然后按<code>e</code>键进入grub设置。</p>
+<h3 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h3><p>ubuntu 分区</p>
+<p>120G</p>
+<p>&#x2F;boot 200M</p>
+<p>&#x2F; 25G</p>
+<p>&#x2F;home 用户数据，下载的文件和媒体文件，多多益善</p>
+<p>swap 8G</p>
+<p>&#x2F;boot 选择逻辑分区</p>
+<h3 id="安装完后的一些操作"><a href="#安装完后的一些操作" class="headerlink" title="安装完后的一些操作"></a>安装完后的一些操作</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新apt包</span></span><br><span class="line">$ sudo apt update</span><br><span class="line">$ sudo apt upgrade</span><br><span class="line"><span class="comment"># 驱动</span></span><br><span class="line">$ ubuntu-drivers devices</span><br><span class="line">$ ubuntu-drivers autoinstall</span><br><span class="line">$ nvidia-settings</span><br></pre></td></tr></table></figure>
+
+<p>安装fcitx，安装搜狗输入法</p>
+<h2 id="Ubuntu18安装zsh"><a href="#Ubuntu18安装zsh" class="headerlink" title="Ubuntu18安装zsh"></a>Ubuntu18安装zsh</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install zsh</span><br><span class="line"></span><br><span class="line">vim /etc/pam.d/ppp</span><br><span class="line"><span class="comment"># 将required 改为sufficient</span></span><br><span class="line">auth       sufficient   pam_shells.so</span><br><span class="line"></span><br><span class="line">chsh -s /bin/zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据官网命令安装</span></span><br><span class="line">wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/linux/ubuntu/" data-id="ckz5mgqkb000qbeoig49lafiv" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/02/linux/shell/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/02/02/linux/webterminal/cockpit-%E4%BD%BF%E7%94%A8web%E7%AE%A1%E7%90%86Redhat/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/VSCode%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/VSCode%E9%85%8D%E7%BD%AEJava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/code-server/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/dcoker/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

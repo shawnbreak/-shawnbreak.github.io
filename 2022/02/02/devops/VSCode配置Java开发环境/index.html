@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="VSCode 配置Java开发环境安装jdk8自行下载安装。 配置环境变量。 Linux在 .bash_profile 里追加如下内容 1234JAVA_HOME&#x3D;&#x2F;opt&#x2F;usr&#x2F;jdkxxxx&#x2F;export JAVA_HOMEPATH&#x3D;$PATH:$JAVA_HOME&#x2F;binexport PATH  运行 java -version 查看版本，查看成功则配置成功。 windowswin + R">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/02/02/devops/VSCode%E9%85%8D%E7%BD%AEJava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="VSCode 配置Java开发环境安装jdk8自行下载安装。 配置环境变量。 Linux在 .bash_profile 里追加如下内容 1234JAVA_HOME&#x3D;&#x2F;opt&#x2F;usr&#x2F;jdkxxxx&#x2F;export JAVA_HOMEPATH&#x3D;$PATH:$JAVA_HOME&#x2F;binexport PATH  运行 java -version 查看版本，查看成功则配置成功。 windowswin + R">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-02T14:05:22.678Z">
+<meta property="article:modified_time" content="2022-02-02T14:05:22.678Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-devops/VSCode配置Java开发环境" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/devops/VSCode%E9%85%8D%E7%BD%AEJava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="VSCode-配置Java开发环境"><a href="#VSCode-配置Java开发环境" class="headerlink" title="VSCode 配置Java开发环境"></a>VSCode 配置Java开发环境</h1><h2 id="安装jdk8"><a href="#安装jdk8" class="headerlink" title="安装jdk8"></a>安装jdk8</h2><p>自行下载安装。</p>
+<p>配置环境变量。</p>
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p>在 .bash_profile 里追加如下内容</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=/opt/usr/jdkxxxx/</span><br><span class="line"><span class="built_in">export</span> JAVA_HOME</span><br><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin</span><br><span class="line"><span class="built_in">export</span> PATH</span><br></pre></td></tr></table></figure>
+
+<p>运行 java -version 查看版本，查看成功则配置成功。</p>
+<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>win + R 运行 sysdm.cpl， 弹出框选择高级&#x3D;&gt;环境变量。</p>
+<p>在系统环境变量添加 JAVA_HOME</p>
+<p>在Path里面添加 %JAVA_HOME%&#x2F;bin</p>
+<h2 id="maven安装配置"><a href="#maven安装配置" class="headerlink" title="maven安装配置"></a>maven安装配置</h2><p>下载解压到安装路径。</p>
+<p>配置环境变量。</p>
+<h3 id="Linux-1"><a href="#Linux-1" class="headerlink" title="Linux"></a>Linux</h3><p>在 .bash_profile 里面追加如下内容</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MAVEN_HOME=/opt/maven</span><br><span class="line"><span class="built_in">export</span> MAVEN_HOME</span><br><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$MAVEN_HOME</span></span><br><span class="line"><span class="built_in">export</span> <span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+
+<p>运行mvn –version查看maven版本，查看成功则配置成成功。</p>
+<h3 id="Windwos"><a href="#Windwos" class="headerlink" title="Windwos"></a>Windwos</h3><p>win + R 运行 sysdm.cpl，弹出框选择高级&#x3D;&gt;环境变量。</p>
+<p>添加系统环境变量MAVEN_HOME。在Path追加%MAVEN_HOME%&#x2F;bin</p>
+<h2 id="安装VSCode"><a href="#安装VSCode" class="headerlink" title="安装VSCode"></a>安装VSCode</h2><p>自行下载安装</p>
+<p><a target="_blank" rel="noopener" href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></p>
+<h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><ul>
+<li><p>Debugger for Java</p>
+</li>
+<li><p>Language Support for Java(TM) by Red Hat</p>
+</li>
+</ul>
+<blockquote>
+<p>注意：Language Support for Java(TM) by Red Hat: 0.64及以下版本可以用jdk8， 0.64以上需要安装jdk11。</p>
+<p>离线安装： Ctrl+Shift+p 调出执行命令框。输入Install  Extension from vsix 回车。选择需要安装的插件即可。</p>
+</blockquote>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="vscode"><a href="#vscode" class="headerlink" title="vscode"></a>vscode</h3><p>打开settings.json</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="comment">//&quot;java.home&quot;: &quot;/usr/java/jdk1.8.0_241-amd64&quot;,</span></span><br><span class="line">    <span class="attr">&quot;java.requirements.JDK11Warning&quot;</span>:<span class="literal">false</span>,</span><br><span class="line">    <span class="attr">&quot;java.import.maven.enabled&quot;</span>:<span class="literal">true</span>,</span><br><span class="line">    <span class="attr">&quot;java.configuration.maven.userSettings&quot;</span>: <span class="string">&quot;/root/code/.m2/settings&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;java.project.importOnFirstTimeStartup&quot;</span>:<span class="string">&quot;automatic&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h3><p>打开.m2&#x2F;settings.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">localRepository</span>&gt;</span>/root/code/.m2/repositoryt<span class="tag">&lt;/<span class="name">localRepository</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">offline</span>&gt;</span>true<span class="tag">&lt;/<span class="name">offline</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="debug"><a href="#debug" class="headerlink" title="debug"></a>debug</h3><p>打开项目 .vscode&#x2F;launche.json</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;version&quot;</span>: <span class="string">&quot;0.2.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;configurations&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;java&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Debug (Launch)-HmcsWebApplication&lt;hmcs-web&gt;&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;request&quot;</span>: <span class="string">&quot;launch&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;mainClass&quot;</span>: <span class="string">&quot;com.hm.hmcs.web.HmcsWebApplication&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;projectName&quot;</span>: <span class="string">&quot;hmcs-web&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><p>Ctrl + Shift + D调出调试栏，选择对应的debug条目启动即可。</p>
+<h2 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean package</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/devops/VSCode%E9%85%8D%E7%BD%AEJava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" data-id="ckz5mgqjv0002beoiaudt4jl7" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/02/devops/VSCode%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/02/02/devops/code-server/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/VSCode%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/VSCode%E9%85%8D%E7%BD%AEJava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/code-server/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/dcoker/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

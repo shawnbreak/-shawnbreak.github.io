@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="配置Redhat7高可用、浮动IP准备两台redhat7服务器: 192.168.10.9, 192.168.10.10 配置&#x2F;etc&#x2F;hosts各节点服务器分别执行 12192.168.10.9 node1192.168.10.10 node2  检查 12ping -c 3 node1ping -c 3 node2  配置高可用yum源各节点服务器分别执行 高可用软件在ad">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/02/02/linux/Redhat7%20HA/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="配置Redhat7高可用、浮动IP准备两台redhat7服务器: 192.168.10.9, 192.168.10.10 配置&#x2F;etc&#x2F;hosts各节点服务器分别执行 12192.168.10.9 node1192.168.10.10 node2  检查 12ping -c 3 node1ping -c 3 node2  配置高可用yum源各节点服务器分别执行 高可用软件在ad">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-02T14:05:22.678Z">
+<meta property="article:modified_time" content="2022-02-02T14:05:22.678Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-linux/Redhat7 HA" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/linux/Redhat7%20HA/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="配置Redhat7高可用、浮动IP"><a href="#配置Redhat7高可用、浮动IP" class="headerlink" title="配置Redhat7高可用、浮动IP"></a>配置Redhat7高可用、浮动IP</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>两台redhat7服务器: 192.168.10.9, 192.168.10.10</p>
+<h2 id="配置-x2F-etc-x2F-hosts"><a href="#配置-x2F-etc-x2F-hosts" class="headerlink" title="配置&#x2F;etc&#x2F;hosts"></a>配置&#x2F;etc&#x2F;hosts</h2><p>各节点服务器分别执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">192.168.10.9 node1</span><br><span class="line">192.168.10.10 node2</span><br></pre></td></tr></table></figure>
+
+<p>检查</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ping -c 3 node1</span><br><span class="line">ping -c 3 node2</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置高可用yum源"><a href="#配置高可用yum源" class="headerlink" title="配置高可用yum源"></a>配置高可用yum源</h2><p>各节点服务器分别执行</p>
+<p>高可用软件在addons文件夹里面</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[HighAvailability]</span><br><span class="line">name=HighAvailability</span><br><span class="line">baseurl=file:///mnt/addons/HighAvailability</span><br><span class="line">gpgcheck=0</span><br><span class="line"><span class="built_in">enable</span>=1</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>各节点服务器分别执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install corosync pacemaker pcs</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>配置开机自启动，各节点服务器分别执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> pcsd</span><br><span class="line">systemctl <span class="built_in">enable</span> corosync</span><br><span class="line">systemctl <span class="built_in">enable</span> pacemaker</span><br></pre></td></tr></table></figure>
+
+<p>启动，各节点服务器分别执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start pcsd</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置高可用用户"><a href="#配置高可用用户" class="headerlink" title="配置高可用用户"></a>配置高可用用户</h2><p>各节点服务器分别执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd hacluster</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建集群"><a href="#创建集群" class="headerlink" title="创建集群"></a>创建集群</h2><p>在node1上 执行即可</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 授权</span></span><br><span class="line">pcs cluster auth node1 node2</span><br><span class="line"><span class="comment"># 配置</span></span><br><span class="line">pcs cluster setup --name my_cluster node1 node2</span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">pcs cluster start --all</span><br><span class="line">pcs cluster <span class="built_in">enable</span> --all</span><br></pre></td></tr></table></figure>
+
+<p>检查状态</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs status cluster</span><br></pre></td></tr></table></figure>
+
+<h2 id="关闭STONITH和Quorum-Policy"><a href="#关闭STONITH和Quorum-Policy" class="headerlink" title="关闭STONITH和Quorum Policy"></a>关闭STONITH和Quorum Policy</h2><p>在node1上 执行即可</p>
+<blockquote>
+<p>STONITH: Shoot The Other Node In The Head</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pcs property <span class="built_in">set</span> stonith-enabled=<span class="literal">false</span></span><br><span class="line">pcs property <span class="built_in">set</span> no-quorum-policy=ignore</span><br><span class="line">pcs property list</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加Resources"><a href="#添加Resources" class="headerlink" title="添加Resources"></a>添加Resources</h2><h3 id="查看Resouces"><a href="#查看Resouces" class="headerlink" title="查看Resouces"></a>查看Resouces</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs status resources</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加浮动IP"><a href="#添加浮动IP" class="headerlink" title="添加浮动IP"></a>添加浮动IP</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs resource create virtual_ip ocf:heartbeat:IPaddr2 ip=192.168.10.11 cidr_netmask=32 op monitor interval=30s</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加nginx"><a href="#添加nginx" class="headerlink" title="添加nginx"></a>添加nginx</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs resource create webserver ocf:heartbeat:nginx configfile=/etc/nginx/nginx.conf op monitor timeout=<span class="string">&quot;5s&quot;</span> interval=<span class="string">&quot;5s&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="配置Cluster-Constraint"><a href="#配置Cluster-Constraint" class="headerlink" title="配置Cluster Constraint"></a>配置Cluster Constraint</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pcs constraint colocation add webserver virtual_ip INFINITY</span><br><span class="line">pcs constraint order virtual_ip <span class="keyword">then</span> webserver</span><br></pre></td></tr></table></figure>
+
+<h2 id="重启集群"><a href="#重启集群" class="headerlink" title="重启集群"></a>重启集群</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pcs cluster stop --all</span><br><span class="line">pcs cluster start --all</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs cluster stop node1</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/linux/Redhat7%20HA/" data-id="ckz5mgqk7000ibeoi75me2xzr" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/02/linux/NetworkManager/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/02/02/linux/Systemd/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/VSCode%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/VSCode%E9%85%8D%E7%BD%AEJava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/code-server/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/dcoker/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

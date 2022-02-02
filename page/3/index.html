@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-linux/centos7" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/linux/centos7/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Centos-7"><a href="#Centos-7" class="headerlink" title="Centos 7"></a>Centos 7</h1><h2 id="SELinux"><a href="#SELinux" class="headerlink" title="SELinux"></a>SELinux</h2><p>关闭SELinux</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sestatus</span><br><span class="line"><span class="built_in">set</span> enforce 0 <span class="comment">#permissive</span></span><br><span class="line">/etc/selinux/config</span><br><span class="line"><span class="comment"># SELinux=enforcing</span></span><br><span class="line"><span class="comment"># SELinux=permissive</span></span><br><span class="line">SELinux=disabled</span><br></pre></td></tr></table></figure>
+
+<h2 id="Firewalld"><a href="#Firewalld" class="headerlink" title="Firewalld"></a>Firewalld</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --status</span><br><span class="line">systemctl status firewalld</span><br><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="yum-源"><a href="#yum-源" class="headerlink" title="yum 源"></a>yum 源</h2><p>下载源配置文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo</span><br></pre></td></tr></table></figure>
+
+<p>修改源配置文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/yum.repos.d/CentOS-Base.repo </span><br></pre></td></tr></table></figure>
+
+<p>打开文件后将版本号改为7即可</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%s/<span class="variable">$releaserver</span>/7/g</span><br></pre></td></tr></table></figure>
+
+<p>更新即可</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum clean all </span><br><span class="line">yum makecache</span><br><span class="line">yum update</span><br></pre></td></tr></table></figure>
+
+
+
+<p>报错：initscripts conflicts with redhat-release-server-7.4-18.el7.x86_64</p>
+<p>解决1：删除冲突包</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e redhat-release-server-7.4-18.el7.x86_64 --nodeps</span><br></pre></td></tr></table></figure>
+
+
+
+<p>解决2(推荐)：阻止更新内核 initscripts</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/yum.conf</span><br></pre></td></tr></table></figure>
+
+<p>追加以下内容</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exclude=kernel*</span><br><span class="line">exclude=centos-release*</span><br><span class="line">exclude=initscripts</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Centos-7-配置Samba"><a href="#Centos-7-配置Samba" class="headerlink" title="Centos 7 配置Samba"></a>Centos 7 配置Samba</h2><ul>
+<li>安装</li>
+</ul>
+<p>将本地iso配置为yum源</p>
+<p>使用yum安装</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install samba -y</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置</li>
+</ul>
+<p>在配置文件中<code>/etc/samba/smb.conf</code>追加如下内容</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[hmcsdata]</span><br><span class="line">	path=/home/heming/hmcsdata</span><br><span class="line">	writeable=yes</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>创建共享目录和共享用户</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir /home/heming/hmcsdata <span class="comment"># 创建共享目录</span></span><br><span class="line">groupadd sambashare <span class="comment"># 闯将共享用户组</span></span><br><span class="line">chgrp sambashare /home/heming/hmcsdata <span class="comment"># 将共享目录的用户组改为sambashare</span></span><br><span class="line">useradd -s /usr/sbin/nologin -G sambashare josh <span class="comment"># 创建共享用户</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>-M</code> -do not create the user’s home directory. We’ll manually create this directory.</p>
+<p><code>-d /samba/josh</code> - set the user’s home directory to <code>/samba/josh</code>.</p>
+<p><code>-s /usr/sbin/nologin</code> - disable shell access for this user.</p>
+<p><code>-G sambashare</code> - add the user to the <code>sambashare</code> group.</p>
+</blockquote>
+<ul>
+<li>启用共享用户</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">smbpasswd -a josh <span class="comment"># 将用户添加（add）到samba配置</span></span><br><span class="line">smbpasswd -e josh <span class="comment"># 启用（enable）用户</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="mail"><a href="#mail" class="headerlink" title="mail"></a>mail</h2><p>安装</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ubuntu</span></span><br><span class="line">sudo apt-get install heirloom-mailx</span><br><span class="line"></span><br><span class="line"><span class="comment"># centos</span></span><br><span class="line">yum install -y mailx </span><br></pre></td></tr></table></figure>
+
+<p>添加配置</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ubuntu</span></span><br><span class="line">vim /etc/nail.rc</span><br><span class="line"><span class="comment"># centos</span></span><br><span class="line">vim /etc/mail.rc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> from=mail@qq.com</span><br><span class="line"><span class="built_in">set</span> smtp=smtp.exmail.qq.com</span><br><span class="line"><span class="built_in">set</span> smtp-auth-user=mail@qq.com</span><br><span class="line"><span class="built_in">set</span> smtp-auth-password=123456</span><br><span class="line"><span class="built_in">set</span> smtp-auth=login</span><br></pre></td></tr></table></figure>
+
+<p>测试</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span>  <span class="string">&quot;MAIL-BODY&quot;</span> | mail -s <span class="string">&quot;Title&quot;</span> 123@qq.com,345@qq.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="GNOME图形化界面"><a href="#GNOME图形化界面" class="headerlink" title="GNOME图形化界面"></a>GNOME图形化界面</h2><ol>
+<li>root模式</li>
+<li>安装 X Windows System</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum groupinstall <span class="string">&quot;X Window System&quot;</span> -y</span><br><span class="line">yum grouplist <span class="comment"># 查看已经安装的软件</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>安装gnome</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum groupinstall <span class="string">&quot;GNOME Desktop&quot;</span> <span class="string">&quot;Graphical Administration Tools&quot;</span> -y</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>启动图形化界面</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reboot <span class="comment"># 先重启</span></span><br><span class="line">startx</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>系统的默认启动界面还是命令行，更改为启动为图形界面执行下面的命令</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target</span><br></pre></td></tr></table></figure>
+
+<h2 id="XFCE-图形界面安装"><a href="#XFCE-图形界面安装" class="headerlink" title="XFCE 图形界面安装"></a>XFCE 图形界面安装</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yum grouplist <span class="comment"># 查看可用安装组</span></span><br><span class="line">yum groupinstall <span class="string">&quot;X Window system&quot;</span></span><br><span class="line">yum groupinstall xfce</span><br><span class="line"></span><br><span class="line">systemctl isolate graphical.target <span class="comment"># 启动</span></span><br><span class="line">systemctl set-default graphical.target <span class="comment"># 设置默认启动</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install cjkuni* -y <span class="comment"># 安装中文字体</span></span><br><span class="line">yum install google-noto-sans-simplified-chinese-fonts.noarch</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装输入法，待验证</span></span><br><span class="line">yum install -y ibus ibus-libpinyin ibus-gtk2 ibus-gtk3 im-chooser gtk2-immodule-xim gtk3-immodule-xim</span><br><span class="line"></span><br><span class="line">im-chooser</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Redhat-7-远程桌面方案"><a href="#Redhat-7-远程桌面方案" class="headerlink" title="Redhat 7 远程桌面方案"></a>Redhat 7 远程桌面方案</h2><blockquote>
+<p>前提：Redhat 7 已经安装了桌面环境 X Window System和Gnome或Xfce或KDE</p>
+</blockquote>
+<h3 id="VNC"><a href="#VNC" class="headerlink" title="VNC"></a>VNC</h3><h3 id="XRDP"><a href="#XRDP" class="headerlink" title="XRDP"></a>XRDP</h3><blockquote>
+<p>an open-source Remote Desktop Protocol server</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">yum install epel-release -y</span><br><span class="line">yum install xrdp -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置开机自启并启动</span></span><br><span class="line">systemctl <span class="built_in">enable</span> xrdp</span><br><span class="line">systemctl <span class="built_in">enable</span> xrdp-sesman</span><br><span class="line">systemctl start xrdp-sesman</span><br><span class="line">systemctl start xrdp</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启防火墙</span></span><br><span class="line">firewall-cmd --permanent --zone=public --add-port=3389/tcp</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<h2 id="yum-download-only"><a href="#yum-download-only" class="headerlink" title="yum download only"></a>yum download only</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install yum-plugin-downloadonly </span><br><span class="line">yum install httpd httpd-devel --downloadonly --downloaddir=/home/httpd</span><br></pre></td></tr></table></figure>
+
+<h2 id="单网卡多IP设置"><a href="#单网卡多IP设置" class="headerlink" title="单网卡多IP设置"></a>单网卡多IP设置</h2><h3 id="方法1：通过网卡配置文件配置多个IP"><a href="#方法1：通过网卡配置文件配置多个IP" class="headerlink" title="方法1：通过网卡配置文件配置多个IP"></a>方法1：通过网卡配置文件配置多个IP</h3><p>vim &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-ens33</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">NAME=eno16777736</span><br><span class="line">DEVICE=eno16777736</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR0=10.91.137.66</span><br><span class="line">PREFIX0=27</span><br><span class="line">GATEWAY0=10.91.137.65        </span><br><span class="line"><span class="comment">#####################</span></span><br><span class="line">IPADDR1=192.168.100.2             </span><br><span class="line">PREFIX1=24      </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可通过nmtui运行命令行图形化界面配置</p>
+</blockquote>
+<h3 id="方法2：-通过网卡别名配置多个IP"><a href="#方法2：-通过网卡别名配置多个IP" class="headerlink" title="方法2： 通过网卡别名配置多个IP"></a>方法2： 通过网卡别名配置多个IP</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/sysconfig/network-scripts/ifcfg-ens33 /etc/sysconfig/network-scripts/ifcfg-ens33:0</span><br><span class="line">vim /etc/sysconfig/network-scripts/ifcfg-ens33:0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">NAME=eno16777736:0</span><br><span class="line">DEVICE=eno16777736:0</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=192.168.100.3</span><br><span class="line">NETMASK=255.255.255.0</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="开启telnet服务"><a href="#开启telnet服务" class="headerlink" title="开启telnet服务"></a>开启telnet服务</h2><ul>
+<li><p>检查是否安装telnet和xinetd</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep telnet</span><br><span class="line">rpm -qa | grep xinetd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装<code>telnet</code>，<code>xinetd</code>服务</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install xinetd telnet telnet-server -y</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>启动 <code>telnet</code>服务</p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置开机自启动</span></span><br><span class="line">systemctl <span class="built_in">enable</span> telnet.socket</span><br><span class="line">systemctl <span class="built_in">enable</span> xinetd</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动telnet</span></span><br><span class="line">systemctl start telnet.socket</span><br><span class="line">systemctl start xinetd</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看telnet的服务状态</span></span><br><span class="line">systemctl status telnet.socket</span><br><span class="line">systemctl status xinetd</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>防火墙开放 <code>telnet</code>服务端口</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/lib/firewalld/services</span><br><span class="line">vim tel.xml</span><br></pre></td></tr></table></figure>
+
+<p>写入以下内容</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">service</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">short</span>&gt;</span>Telnet<span class="tag">&lt;/<span class="name">short</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>Telnet is a protocol for logging into remote machines. It is unencrypted, and provides little security from network snooping attacks. Enabling telnet is not recommended. You need the telnet-server package installed for this option to be useful.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">port</span> <span class="attr">port</span>=<span class="string">&quot;23&quot;</span> <span class="attr">protocol</span>=<span class="string">&quot;tcp&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">service</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在终端键入以下命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --add-service=telnet --zone=public --permanent</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>查看防火墙是否开启<code>telnet</code>服务端口的命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;firewall-cmd --list-services</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<ul>
+<li>关闭<code>telnet</code>服务</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop telnet.socket</span><br><span class="line">systemctl stop xinetd</span><br><span class="line">firewall-cmd --remove-service=telnet --permanent</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><h2 id="非root用户绑定低端口问题"><a href="#非root用户绑定低端口问题" class="headerlink" title="非root用户绑定低端口问题"></a>非root用户绑定低端口问题</h2><h3 id="解决1：-cap-net-bind-service"><a href="#解决1：-cap-net-bind-service" class="headerlink" title="解决1： cap_net_bind_service"></a>解决1： cap_net_bind_service</h3><p>setcap ‘cap_net_bind_service&#x3D;+ep’ &#x2F;usr&#x2F;java&#x2F;jdk1.8.0_241-amd64&#x2F;jre&#x2F;bin&#x2F;java<br>setcap -r &#x2F;usr&#x2F;java&#x2F;jdk1.8.0_241-amd64&#x2F;jre&#x2F;bin&#x2F;java<br>注意：<br>1、Linux的内核版本必须不低于2.6.24<br>2、针对脚本不起作用，只能是ELF可执行文件<br>3、会禁用程序的LD_LIBRARY_PATH变量<br>java有自己的LD_LIBRARY_PATH变量，所以这招行不通</p>
+<h3 id="解决2：端口转发"><a href="#解决2：端口转发" class="headerlink" title="解决2：端口转发"></a>解决2：端口转发</h3><h3 id="解决3：authbind"><a href="#解决3：authbind" class="headerlink" title="解决3：authbind"></a>解决3：authbind</h3><p>github:<a target="_blank" rel="noopener" href="https://github.com/tootedom/authbind-centos-rpm">https://github.com/tootedom/authbind-centos-rpm</a><br>参考博客： <a target="_blank" rel="noopener" href="https://beproud.wordpress.com/2019/04/19/install-tomcat-in-centos-port-80-443/">https://beproud.wordpress.com/2019/04/19/install-tomcat-in-centos-port-80-443/</a></p>
+<h2 id="java非root用户调用InetAddress-isReachable-失败问题"><a href="#java非root用户调用InetAddress-isReachable-失败问题" class="headerlink" title="java非root用户调用InetAddress.isReachable()失败问题"></a>java非root用户调用InetAddress.isReachable()失败问题</h2><p> Linux non-root user call java InetAddress.isReachable()<br>为什么Linux非root用户调用java的InetAddress.isReachable()会失败？<br>java中的InetAddress.isReachable()是通调用Linux的系统调用来实现的，然而Linux的系统调用是需要root权限的，所以会失败。<br>参考回答：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/2777226/isreachable-in-java-doesnt-appear-to-be-working-quite-the-way-its-supposed-to">https://stackoverflow.com/questions/2777226/isreachable-in-java-doesnt-appear-to-be-working-quite-the-way-its-supposed-to</a><br>参考博客：<a target="_blank" rel="noopener" href="https://bordet.blogspot.com/2006/07/icmp-and-inetaddressisreachable.html">https://bordet.blogspot.com/2006/07/icmp-and-inetaddressisreachable.html</a></p>
+<p>解决1：直接调用系统提供ping程序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Process p1 = java.lang.Runtime.getRuntime().exec(<span class="string">&quot;ping -c 1 www.google.com&quot;</span>);</span><br><span class="line"><span class="keyword">int</span> returnVal = p1.waitFor();</span><br><span class="line"><span class="keyword">boolean</span> reachable = (returnVal==<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<p>说明：ping有suid权限，任何人调用这个程序的暂时有root的权限</p>
+<h2 id="U盘安装启动问题问题"><a href="#U盘安装启动问题问题" class="headerlink" title="U盘安装启动问题问题"></a>U盘安装启动问题问题</h2><p>制作Linux启动U盘时，U盘格式为FAT32，U盘名字的长度有限制。</p>
+<p>如<code>RHEL-7.4 Server.x86_64</code>，grub的安装启动参数中只能读到&#96;&#96;RHEL-7_4\20SE&#96;，因此会导致安装的时候找不到安装源。</p>
+<p>解决方案有两种（亲测有效）</p>
+<ol>
+<li><p>改U盘名字（LABEL方式启动）</p>
+<p>制作完启动U盘后，将其名字改短，如<code>RHEL</code></p>
+<p>启动界面按<kbd>e</kbd>编辑安装启动参数，将<code>inst.stage2=hd:LABEL=RHEL-7_4\20SE quiet</code>改为 <code>inst.stage2=hd:LABEL=RHEL quiet</code></p>
+</li>
+<li><p>直接用<code>/dev/sdb4</code>启动</p>
+<p>不改名字直接启动会报错，然后几分钟后会进入dracut。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /dev</span><br></pre></td></tr></table></figure>
+
+<p>可以看到有 <code>sda sda1 sdb sdb1 sdb2</code>等等</p>
+<p>找到你U盘对应的那一个，一般来说为sd开头的最后一个，不确定可以挂载看看里面的内容。</p>
+<p>然后执行<code>reboot</code>命令重启。</p>
+<p>启动界面按<kbd>e</kbd>编辑安装启动参数，将<code>inst.stage2=hd:LABEL=RHEL-7_4\20SE quiet</code>改为 <code>inst.stage2=hd:/dev/sdb4 quiet</code>（注意不一定是sdb4，根据具体情况）</p>
+</li>
+</ol>
+<h2 id="启动报错"><a href="#启动报错" class="headerlink" title="启动报错"></a>启动报错</h2><p> Failed to open \efi\centos\grubx64.efi - not found </p>
+<p>解决方案：用启动盘进入急救模式，将启动盘中的grubx64.efi文件拷到 对应目录下即可</p>
+<h2 id="重启进入grub"><a href="#重启进入grub" class="headerlink" title="重启进入grub"></a>重启进入grub</h2><p>环境：redhat 7.4， minimal install + X Window system + xfce</p>
+<p>问题描述：换yum源后yum update，然后重启进入grub模式。启动选项有一个centos和一个redhat。</p>
+<p>解决：急救模式下，将 &#x2F;boot&#x2F;efi&#x2F;EFI&#x2F;redhat&#x2F;grub.cfg拷到 &#x2F;boot&#x2F;efi&#x2F;EFI&#x2F;centos&#x2F;然后重启即可</p>
+<h1 id="重装yum"><a href="#重装yum" class="headerlink" title="重装yum"></a>重装yum</h1><blockquote>
+<p><del>背景：redhat 7 没有redhat账户不能用</del></p>
+<p>只要配置对应的yum源就行，不需要重装yum</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | greap yum</span><br><span class="line"><span class="comment"># 删除原本的yum文件</span></span><br><span class="line">rpm -qa | grep yum | xargs rpm -e --nodeps</span><br></pre></td></tr></table></figure>
+<p>去阿里镜像站下载五个文件（对应版本的目录下）<br><a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/">https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/</a></p>
+<p>yum-metadata-parser<br>yum<br>yum-plugin-fastestmirror<br>yum-utils<br>python-urlgrabber</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-metadata-parser-1.1.4-10.el7.x86_64.rpm</span><br><span class="line">wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-3.4.3-158.el7.centos.noarch.rpm</span><br><span class="line">wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-plugin-fastestmirror-1.1.31-45.el7.noarch.rpm</span><br><span class="line">wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-utils-1.1.31-45.el7.noarch.rpm</span><br><span class="line">wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/python-urlgrabber-3.10-8.el7.noarch.rpm  </span><br></pre></td></tr></table></figure>
+
+<p>安装，加上 –force强制安装（解决依赖问题）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh xxx1.rpm xxx2.rpm xxx3.rpm xxx4.rpm xxx5.rpm --force --nodeps</span><br></pre></td></tr></table></figure>
+
+<p>阿里镜像yum源</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">wget-O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo</span><br></pre></td></tr></table></figure>
+
+<p>修改版本号</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/yum.repos.d/CentOS-Base.repo </span><br><span class="line"></span><br><span class="line">:%s/<span class="variable">$releaserver</span>/7/g</span><br></pre></td></tr></table></figure>
+
+<p>最后</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum clean all </span><br><span class="line">yum makecache</span><br><span class="line">yum update</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/linux/centos7/" data-id="ckz5mgqk9000kbeoiaw5950qt" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux/clash" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/linux/clash/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="clash"><a href="#clash" class="headerlink" title="clash"></a>clash</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><a target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash">https://github.com/Dreamacro/clash</a></p>
+<p>下载对应的版本</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -O config.yml &lt;clash托管连接&gt;</span><br><span class="line">./clash</span><br></pre></td></tr></table></figure>
+
+<h2 id="web配置管理工具"><a href="#web配置管理工具" class="headerlink" title="web配置管理工具"></a>web配置管理工具</h2><p>直接访问如下链接</p>
+<p><a target="_blank" rel="noopener" href="http://clash.razord.top/">http://clash.razord.top</a></p>
+<h2 id="clash-for-windows"><a href="#clash-for-windows" class="headerlink" title="clash for windows"></a>clash for windows</h2><p>有图形界面的clash，纸质windows， mac, linux</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Fndroid/clash_for_windows_pkg">https://github.com/Fndroid/clash_for_windows_pkg</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/linux/clash/" data-id="ckz5mgqk9000lbeoicbt991ui" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux/dhcp" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/linux/dhcp/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="dhcp"><a href="#dhcp" class="headerlink" title="dhcp"></a>dhcp</h1><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install dhcp</span><br></pre></td></tr></table></figure>
+
+<h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start dhcpd</span><br></pre></td></tr></table></figure>
+
+<h2 id="Help"><a href="#Help" class="headerlink" title="Help"></a>Help</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man dhcpd</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>&#x2F;etc&#x2F;dhcp&#x2F;dhcpd.conf</p>
+<ul>
+<li>Subnet Declaration</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">subnet 192.168.1.0 netmask 255.255.255.0 &#123;</span><br><span class="line">    option routers 192.168.1.254;</span><br><span class="line">    option subnet-mask 255.255.255.0;</span><br><span class="line">    option domain-search <span class="string">&quot;example.com&quot;</span>;</span><br><span class="line">    option domain-name-servers 192.168.1.1;</span><br><span class="line">    option time-offset -18000; <span class="comment"># Eastern Standard Time</span></span><br><span class="line">    range 192.168.1.10 192.168.1.100;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Range Parameter</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">default-lease-time 600;</span><br><span class="line">max-lease-time 7200;</span><br><span class="line">option subnet-mask 255.255.255.0;</span><br><span class="line">option broadcast-address 192.168.1.255;</span><br><span class="line">option routers 192.168.1.254;</span><br><span class="line">option domain-name-servers 192.168.1.1, 192.168.1.2;</span><br><span class="line">option domain-search <span class="string">&quot;example.com&quot;</span>;</span><br><span class="line">subnet 192.168.1.0 netmask 255.255.255.0 &#123;</span><br><span class="line">	range 192.168.1.10 192.168.1.100;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Static IP Address Using DHCP</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">host apex &#123;</span><br><span class="line">    option host-name <span class="string">&quot;apex.example.com&quot;</span>;</span><br><span class="line">    hardware ethernet 00:A0:78:8E:9E:AA;</span><br><span class="line">    fixed-address 192.168.1.4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Static IP Address Using DHCP on Multiple Interfaces</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host apex.0 &#123;</span><br><span class="line">    option host-name “apex.example.com”;</span><br><span class="line">    hardware ethernet 00:A0:78:8E:9E:AA;</span><br><span class="line">    option dhcp-client-identifier=ff:00:00:00:00:00:02:00:00:02:c9:00:00:02:c9:03:00:31:7b:11;</span><br><span class="line">    fixed-address 172.31.0.50,172.31.2.50,172.31.1.50,172.31.3.50;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install bind-chroot</span><br><span class="line">systemctl status named</span><br><span class="line">systemctl start named</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h2><ul>
+<li>&#x2F;etc&#x2F;named.conf</li>
+</ul>
+<p>将监听地址和运行查询的地址都改为 any，分别表示服务器上的所有IP地址均可提供DNS域名解析服务，以及允许所有人对本服务器发送DNS查询请求。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listen-on port 53 &#123; any; &#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>&#x2F;etc&#x2F;named.rfc1912.zones</strong></li>
+</ul>
+<p>用来保存域名和IP地址对应关系的所在位置</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">zone <span class="string">&quot;example.com&quot;</span> IN &#123;</span><br><span class="line">        <span class="built_in">type</span> master;</span><br><span class="line">        file <span class="string">&quot;example.com.zone&quot;</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>&#x2F;var&#x2F;named&#x2F;example.com.zone</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$TTL</span> 1D</span><br><span class="line">@       IN SOA  @ example.com. (</span><br><span class="line">                                        0       ; serial</span><br><span class="line">                                        1D      ; refresh</span><br><span class="line">                                        1H      ; retry</span><br><span class="line">                                        1W      ; expire</span><br><span class="line">                                        3H )    ; minimum</span><br><span class="line">        NS      @</span><br><span class="line">        A       192.168.86.128</span><br><span class="line">        AAAA    ::1</span><br></pre></td></tr></table></figure>
+
+<h2 id="检查配置，重启服务"><a href="#检查配置，重启服务" class="headerlink" title="检查配置，重启服务"></a>检查配置，重启服务</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">named-checkconf</span><br><span class="line">named-checkzone eample.com /var/named/example.com.zone </span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/resolv.conf</span><br><span class="line"><span class="comment">#进入该配置文件，指定使用的域名解析服务器。</span></span><br><span class="line"><span class="comment"># Generated by NetworkManager</span></span><br><span class="line">nameserver 192.168.245.128</span><br><span class="line">search 192.168.245.128</span><br></pre></td></tr></table></figure>
+
+<p>重启服务</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart named</span><br></pre></td></tr></table></figure>
+
+<h1 id="squid"><a href="#squid" class="headerlink" title="squid"></a>squid</h1><p>squid是一个代理服务器，可以用作内容缓存，提高访问速度。</p>
+<h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install squid</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="配置缓存代理服务器"><a href="#配置缓存代理服务器" class="headerlink" title="配置缓存代理服务器"></a>配置缓存代理服务器</h2><p> &#x2F;etc&#x2F;squid&#x2F;squid.conf</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">acl localnet src 192.0.2.0/24</span><br><span class="line">acl localnet 2001:db8::/32</span><br><span class="line">acl SSL_ports port 443</span><br><span class="line">acl Safe_ports port 21</span><br><span class="line">acl Safe_ports port 80</span><br><span class="line">acl Safe_ports port 443</span><br><span class="line">cache_dir ufs /var/spool/squid 10000 16 256</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start squid</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/linux/dhcp/" data-id="ckz5mgqk9000mbeoi4hpfgkju" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux/redhat7.4 开发环境配置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/linux/redhat7.4%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="redhat7-4-开发环境配置"><a href="#redhat7-4-开发环境配置" class="headerlink" title="redhat7.4 开发环境配置"></a>redhat7.4 开发环境配置</h1><p>[TOC]</p>
+<h2 id="1-启动U盘制作"><a href="#1-启动U盘制作" class="headerlink" title="1. 启动U盘制作"></a>1. 启动U盘制作</h2><p>制作工具：rufus</p>
+<h2 id="2-安装系统"><a href="#2-安装系统" class="headerlink" title="2. 安装系统"></a>2. 安装系统</h2><p>进入BIOS设置U盘启动。</p>
+<p>分区配置</p>
+<table>
+<thead>
+<tr>
+<th>挂载点</th>
+<th>容量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x2F;boot</td>
+<td>1024M</td>
+</tr>
+<tr>
+<td>swap</td>
+<td>2048M</td>
+</tr>
+<tr>
+<td>&#x2F;</td>
+<td>所有剩余</td>
+</tr>
+</tbody></table>
+<p>账户配置</p>
+<table>
+<thead>
+<tr>
+<th>账户</th>
+<th>密码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>root</td>
+<td>Root1234</td>
+</tr>
+<tr>
+<td>hemign</td>
+<td>Heming1234</td>
+</tr>
+</tbody></table>
+<p>软件选择：Server with GUI</p>
+<h2 id="3-网络配置"><a href="#3-网络配置" class="headerlink" title="3. 网络配置"></a>3. 网络配置</h2><p>默认：dhcp</p>
+<h2 id="4-CentOS-yum安装"><a href="#4-CentOS-yum安装" class="headerlink" title="4. CentOS yum安装"></a>4. CentOS yum安装</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | greap yum</span><br><span class="line"><span class="comment"># 删除原本的yum文件</span></span><br><span class="line">sudo rpm -qa | grep yum | xargs rpm -e --nodeps</span><br></pre></td></tr></table></figure>
+<p><del>去阿里镜像站下载五个文件（对应版本的目录下）</del><br><del><a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/">https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/</a></del></p>
+<p><del>yum-metadata-parser</del><br><del>yum</del><br><del>yum-plugin-fastestmirror</del><br><del>yum-utils</del><br><del>python-urlgrabber</del></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-metadata-parser-1.1.4-10.el7.x86_64.rpm</span><br><span class="line">wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-3.4.3-158.el7.centos.noarch.rpm</span><br><span class="line">wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-plugin-fastestmirror-1.1.31-45.el7.noarch.rpm</span><br><span class="line">wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-utils-1.1.31-45.el7.noarch.rpm</span><br><span class="line">wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/python-urlgrabber-3.10-8.el7.noarch.rpm  </span><br></pre></td></tr></table></figure>
+
+<p><del>安装，加上 –force强制安装（解决依赖问题）</del></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -ivh xxx1.rpm xxx2.rpm xxx3.rpm xxx4.rpm xxx5.rpm --force --nodeps</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>说明：不需要卸载原有的yum重新安装，添加阿里或者163的cengtos的yum仓库即可。</p>
+</blockquote>
+<p>阿里镜像yum源</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo</span><br></pre></td></tr></table></figure>
+
+<p>修改版本号</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/yum.repos.d/CentOS-Base.repo </span><br><span class="line"></span><br><span class="line">:%s/<span class="variable">$releaserver</span>/7/g</span><br></pre></td></tr></table></figure>
+
+<p>最后</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum clean all </span><br><span class="line">sudo yum makecache</span><br><span class="line">sudo yum update</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-idea安装"><a href="#5-idea安装" class="headerlink" title="5. idea安装"></a>5. idea安装</h2><p>下载二进制软件包: ideaC.tar.gz</p>
+<p>解压安装</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo cp ideaC.tar.gz /opt/</span><br><span class="line"><span class="built_in">cd</span> /opt</span><br><span class="line">sudo tar -zxvf ideaC.tar.gz</span><br><span class="line"><span class="built_in">cd</span> ideaC</span><br><span class="line">sudo sh idea.sh <span class="comment"># 执行这个脚本开始初始配置</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-VS-code-安装"><a href="#6-VS-code-安装" class="headerlink" title="6. VS code 安装"></a>6. VS code 安装</h2><p>官网下载vs code的rpm包: code*.rpm</p>
+<p>rpm安装</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh code*.rpm</span><br></pre></td></tr></table></figure>
+
+<p>如果报错：Failed Deppendencies: libXss.so…</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install libXss* -y</span><br><span class="line">rpm -ivh code*.rpm </span><br><span class="line">code <span class="comment">## 启动vscode</span></span><br></pre></td></tr></table></figure>
+
+<p>如果有报错信息：&#x2F;lib&#x2F;libdbus.so…… no version available….</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install dbus -y</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-Typora安装"><a href="#7-Typora安装" class="headerlink" title="7. Typora安装"></a>7. Typora安装</h2><p>官网下载二进制文件：Typora-linux-x64.tar.gz （<a target="_blank" rel="noopener" href="https://www.typora.io/#linux%EF%BC%89">https://www.typora.io/#linux）</a></p>
+<p>解压安装</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cp Typora-linux-x64.tar.gz /opt/</span><br><span class="line"><span class="built_in">cd</span> /opt</span><br><span class="line">tar -zxvf Typora-linux-x64.tar.gz</span><br><span class="line"><span class="built_in">cd</span> Typora-linux-x64</span><br><span class="line">./Typora <span class="comment"># 执行成功会出现tyora编辑界面</span></span><br></pre></td></tr></table></figure>
+
+<p>报错：</p>
+<ol>
+<li>&#x2F;lib&#x2F;libdbus.so…… no version available</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install dbus -y <span class="comment"># 安装所缺调用库即可</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>..(省略)make sure the &#x2F;opt&#x2F;Typora-linux-x64&#x2F;chrom-sandbox’s ower is root, and has 4755 mode.</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R root /opt/Typora-linux-x64</span><br><span class="line">sudo chgrp -R root /opt/Typora-linux-x64</span><br><span class="line">sudo chmod 4755 /opt/Typora-linux-x64/chrome-sandbox</span><br></pre></td></tr></table></figure>
+
+<p>创建快捷方式</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su root</span><br><span class="line">vim /usr/share/applications/typora.desktop</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Name=Typora</span><br><span class="line">Exec=/opt/Typora-linux-x64/Typora %U</span><br><span class="line">Icon=/opt/Typora-linux-x64/resources/app/asserts/icon/icon_128x128.png</span><br><span class="line">Type=Application</span><br><span class="line">Terminal=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>保存文件即可</p>
+<h2 id="8-安装svn"><a href="#8-安装svn" class="headerlink" title="8. 安装svn"></a>8. 安装svn</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install svn</span><br><span class="line">svn checkout repository-url <span class="comment"># 拉去源码</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="9-安装-oracle-jdk"><a href="#9-安装-oracle-jdk" class="headerlink" title="9. 安装 oracle jdk"></a>9. 安装 oracle jdk</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep jdk | xargs rpm -e --nodeps</span><br><span class="line">rpm -ivh jdk*.rpm</span><br><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-安装nodejs"><a href="#10-安装nodejs" class="headerlink" title="10. 安装nodejs"></a>10. 安装nodejs</h2><p>官网下载二进制包：node-v14.0.0-linux-x64.tar</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp node-v14.0.0-linux-x64.tar /opt/</span><br><span class="line">xz -d node-v14.0.0-linux-x64.tar.xz</span><br><span class="line">tar -xf node-v14.0.0-linux-x64.tar</span><br></pre></td></tr></table></figure>
+
+<p>部署bin文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ln -s /opt/node-v14.0.0-linux-x64/bin/node /usr/bin/node</span><br><span class="line">ln -s /opt/node-v14.0.0-linux-x64/bin/npm /usr/bin/npm</span><br><span class="line">ln -s /opt/node-v14.0.0-linux-x64/bin/npm /usr/bin/npx</span><br></pre></td></tr></table></figure>
+
+<p>测试</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line">npx	</span><br></pre></td></tr></table></figure>
+
+<p>设置淘宝的npm仓库</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看源</span></span><br><span class="line">npm get registry</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置淘宝源</span></span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="11-安装gcc-gcc-c"><a href="#11-安装gcc-gcc-c" class="headerlink" title="11.安装gcc, gcc-c++"></a>11.安装gcc, gcc-c++</h2><p>npm install 时报错 make: g++: Command not found</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install make gcc gcc-c++ -y</span><br></pre></td></tr></table></figure>
+
+<h2 id="12-安装ipmitool"><a href="#12-安装ipmitool" class="headerlink" title="12. 安装ipmitool"></a>12. 安装ipmitool</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install ipmitool</span><br></pre></td></tr></table></figure>
+
+<h2 id="13-安装Dell的racadm"><a href="#13-安装Dell的racadm" class="headerlink" title="13. 安装Dell的racadm"></a>13. 安装Dell的racadm</h2><p>解压</p>
+<p>安装</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cd 到解压目录的racadm路径下</span></span><br><span class="line">sudo sh install_racadm.sh</span><br></pre></td></tr></table></figure>
+
+<p>使用时报错：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[heming@localhost ~]$ racadm -r 192.168.1.196 -u root -p calvin --nocertwarn get -t xml -f test.xml</span><br><span class="line">ERROR: RAC1170: Unable to find the SSL library <span class="keyword">in</span> the default path.</span><br><span class="line">       If a SSL library is not installed, install one and retry the </span><br><span class="line">       operation. If a SSL library is installed, create a soft-link of the </span><br><span class="line">       installed SSL library to <span class="string">&quot;libssl.so&quot;</span> using the linux <span class="string">&quot;ln&quot;</span> <span class="built_in">command</span> </span><br><span class="line">       and retry the operation.</span><br></pre></td></tr></table></figure>
+
+<p>原因：缺少ssl库文件</p>
+<p>解决：</p>
+<p>安装openssl</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install openssl</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以找到ssl库的位置在 /usr/lib64/libssl.so.1.0.2k</span></span><br><span class="line">sudo find / -name libssl.so*</span><br><span class="line">sudo ln -s /usr/lib64/libssl.so.1.0.2k /opt/dell/srvadmin/lib64/libssl.so</span><br></pre></td></tr></table></figure>
+
+<h2 id="14-安装Huawei的urest-umate"><a href="#14-安装Huawei的urest-umate" class="headerlink" title="14. 安装Huawei的urest,umate"></a>14. 安装Huawei的urest,umate</h2><p>解压二进制软件包到项目下制定路径即可。</p>
+<p>注意：请将压缩包在linux环境下用tar解压，涉及到链接文件，和文件权限等问题。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/linux/redhat7.4%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" data-id="ckz5mgqka000nbeoi3hzzd52l" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux/shc" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/linux/shc/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="shell脚本加密"><a href="#shell脚本加密" class="headerlink" title="shell脚本加密"></a>shell脚本加密</h2><p><a target="_blank" rel="noopener" href="http://www.datsi.fi.upm.es/~frosal/">http://www.datsi.fi.upm.es/~frosal/</a></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.datsi.fi.upm.es/~frosal/sources/shc-3.8.7.tgz</span><br><span class="line">tar xvfz shc-3.8.7.tgz</span><br><span class="line"><span class="built_in">cd</span> shc-3.8.7</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+
+<h3 id="静态编译脚本"><a href="#静态编译脚本" class="headerlink" title="静态编译脚本"></a>静态编译脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS=-static shc -r -f test.sh</span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<ul>
+<li>CFLAGS&#x3D;-static： 静态编译，生成的可执行文件可在别的设备上执行</li>
+<li>-r: 是生成的可执行文件可在别的系统上执行</li>
+<li>-f： 指定脚本</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/linux/shc/" data-id="ckz5mgqka000obeoi42127pqq" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux/shell" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/linux/shell/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h1><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="shell-变量"><a href="#shell-变量" class="headerlink" title="shell 变量"></a>shell 变量</h3><ul>
+<li><strong>变量</strong></li>
+</ul>
+<p>注意：等号两边不能有空格</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var=shawn</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$var</span></span><br></pre></td></tr></table></figure>
+
+<p>单引号：仅一般字符</p>
+<p>双引号：可以保有变量内容</p>
+<p>反引号：反引号的命令会被先执行，作为外部的输入信息</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l `locate crontab`</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一样</span></span><br><span class="line">version=$(uname -r)</span><br><span class="line">version=`uname -r`</span><br></pre></td></tr></table></figure>
+
+<p> 字符串可以用单引号，也可以用双引号，也可以不用引号。</p>
+<ul>
+<li>只读变量</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">myUrl=<span class="string">&quot;https://www.shawn.com&quot;</span></span><br><span class="line"><span class="built_in">readonly</span> myUrl</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除变量</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">unset</span> variable_name</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取字符串长度</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string=<span class="string">&quot;abcd&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;#string&#125;</span> <span class="comment">#输出 4</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>提取子字符串</li>
+</ul>
+<p>以下实例从字符串第 <strong>2</strong> 个字符开始截取 <strong>4</strong> 个字符：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string=<span class="string">&quot;runoob is a great site&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;string:1:4&#125;</span> <span class="comment"># 输出 unoo</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="变量字符串操作"><a href="#变量字符串操作" class="headerlink" title="变量字符串操作"></a>变量字符串操作</h3><ul>
+<li>**$</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/linux/shell/" data-id="ckz5mgqkb000pbeoi7mbibijt" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux/ubuntu" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/linux/ubuntu/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="ubuntu-安装"><a href="#ubuntu-安装" class="headerlink" title="ubuntu 安装"></a>ubuntu 安装</h1><h3 id="windows10-ubuntu18-04双系统，重启关机卡的问题"><a href="#windows10-ubuntu18-04双系统，重启关机卡的问题" class="headerlink" title="windows10 + ubuntu18.04双系统，重启关机卡的问题"></a>windows10 + ubuntu18.04双系统，重启关机卡的问题</h3><p>高亮install ubuntu，然后按 <code>e</code>键，进入grub设置，将quiet splash – 改为 quiet splash nomodeset</p>
+<p>安装完后，也可以在引导界面高亮ubuntu然后按<code>e</code>键进入grub设置。</p>
+<h3 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h3><p>ubuntu 分区</p>
+<p>120G</p>
+<p>&#x2F;boot 200M</p>
+<p>&#x2F; 25G</p>
+<p>&#x2F;home 用户数据，下载的文件和媒体文件，多多益善</p>
+<p>swap 8G</p>
+<p>&#x2F;boot 选择逻辑分区</p>
+<h3 id="安装完后的一些操作"><a href="#安装完后的一些操作" class="headerlink" title="安装完后的一些操作"></a>安装完后的一些操作</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新apt包</span></span><br><span class="line">$ sudo apt update</span><br><span class="line">$ sudo apt upgrade</span><br><span class="line"><span class="comment"># 驱动</span></span><br><span class="line">$ ubuntu-drivers devices</span><br><span class="line">$ ubuntu-drivers autoinstall</span><br><span class="line">$ nvidia-settings</span><br></pre></td></tr></table></figure>
+
+<p>安装fcitx，安装搜狗输入法</p>
+<h2 id="Ubuntu18安装zsh"><a href="#Ubuntu18安装zsh" class="headerlink" title="Ubuntu18安装zsh"></a>Ubuntu18安装zsh</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install zsh</span><br><span class="line"></span><br><span class="line">vim /etc/pam.d/ppp</span><br><span class="line"><span class="comment"># 将required 改为sufficient</span></span><br><span class="line">auth       sufficient   pam_shells.so</span><br><span class="line"></span><br><span class="line">chsh -s /bin/zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据官网命令安装</span></span><br><span class="line">wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/linux/ubuntu/" data-id="ckz5mgqkb000qbeoig49lafiv" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux/webterminal/cockpit-使用web管理Redhat" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/linux/webterminal/cockpit-%E4%BD%BF%E7%94%A8web%E7%AE%A1%E7%90%86Redhat/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="cockpit"><a href="#cockpit" class="headerlink" title="cockpit"></a>cockpit</h1><p>[toc]</p>
+<p><a target="_blank" rel="noopener" href="https://cockpit-project.org/running.html">Running Cockpit — Cockpit Project (cockpit-project.org)</a></p>
+<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install cockpit -y</span><br></pre></td></tr></table></figure>
+
+<h2 id="Firewall"><a href="#Firewall" class="headerlink" title="Firewall"></a>Firewall</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --add-service=cockpit --permanent</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start cockpit.socket</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Nginx-Proxy"><a href="#Nginx-Proxy" class="headerlink" title="Nginx Proxy"></a>Nginx Proxy</h2><p>vim &#x2F;etc&#x2F;cockpit&#x2F;cockpit.conf</p>
+<p>允许跨域，关闭ssl，设置根路径</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[WebService]</span><br><span class="line">Origins = https://vm2 https://vm2:9090 wss://vm wss://vm:9090</span><br><span class="line">ProtocolHeader = X-Forwarded-Proto</span><br><span class="line">AllowUnencrypted = <span class="literal">true</span></span><br><span class="line">UrlRoot = /cockpit0/</span><br></pre></td></tr></table></figure>
+
+
+
+<p>vim  vim &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;cockpit.socket</p>
+<p>因为关闭了ssl，所以为了安全，改成只监听本地端口</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[Socket]</span><br><span class="line">ListenStream=127.0.0.1:9090</span><br></pre></td></tr></table></figure>
+<p>修改配置后重启cockpit</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart cockpit</span><br></pre></td></tr></table></figure>
+
+
+
+<p>修改nginx配置，可通过 <a target="_blank" rel="noopener" href="https://ip/cockpi0/">https://ip/cockpi0/</a> 访问 cockpit</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">location</span><span class="regexp"> ^~/cockpit0/</span> &#123;</span><br><span class="line">    <span class="attribute">proxy_pass</span> http://localhost:9090/cockpit0/;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> X-Forwarded-Proto $scheme;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> Host $host;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> Upgrade $http_upgrade;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> Connection upgrade;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> Accept-Encoding gzip;</span><br><span class="line">    <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">    <span class="attribute">proxy_buffering</span> <span class="literal">off</span>;</span><br><span class="line">    <span class="attribute">gzip</span> <span class="literal">off</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/linux/webterminal/cockpit-%E4%BD%BF%E7%94%A8web%E7%AE%A1%E7%90%86Redhat/" data-id="ckz5mgqkc000rbeoi3gvufkh6" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux/webterminal/shellinabox" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/linux/webterminal/shellinabox/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="shellinabox"><a href="#shellinabox" class="headerlink" title="shellinabox"></a>shellinabox</h1><p>说明：通过web访问服务器命令行。</p>
+<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install shellinabox</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start shellinaboxd.service</span><br></pre></td></tr></table></figure>
+
+
+
+<p>访问 <a target="_blank" rel="noopener" href="https://ip:4200/">https://ip:4200</a> 登录使用</p>
+<p>注意，默认不能直接使用root登录。</p>
+<h2 id="Nginx-Proxy"><a href="#Nginx-Proxy" class="headerlink" title="Nginx Proxy"></a>Nginx Proxy</h2><ol>
+<li>shellinabox启动参数，禁用ssl，方便nginx代理，改成只监听localhost</li>
+</ol>
+<p>vim &#x2F;etc&#x2F;sysconfig&#x2F;shellinabox</p>
+<p>修改OPTS为如下， 加上 –localhost-only -t</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OPTS=<span class="string">&quot;--disable-ssl-menu --localhost-only -t -s /:LOGIN&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>nginx配置修改</li>
+</ol>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">location</span><span class="regexp"> ^~/shellinabox/</span> &#123;</span><br><span class="line">       <span class="attribute">proxy_pass</span> http://127.0.0.1:4200/;</span><br><span class="line">       <span class="attribute">proxy_redirect</span> default;</span><br><span class="line"></span><br><span class="line">       <span class="attribute">proxy_set_header</span> Host $host;</span><br><span class="line">       <span class="attribute">proxy_set_header</span> X-Real-IP $remote_addr;</span><br><span class="line">       <span class="attribute">proxy_set_header</span> X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line"></span><br><span class="line">       <span class="attribute">client_max_body_size</span> <span class="number">10m</span>;</span><br><span class="line">       <span class="attribute">client_body_buffer_size</span> <span class="number">128k</span>;</span><br><span class="line"></span><br><span class="line">       <span class="attribute">proxy_connect_timeout</span> <span class="number">90</span>;</span><br><span class="line">       <span class="attribute">proxy_send_timeout</span> <span class="number">90</span>;</span><br><span class="line">       <span class="attribute">proxy_read_timeout</span> <span class="number">90</span>;</span><br><span class="line"></span><br><span class="line">       <span class="attribute">proxy_buffer_size</span> <span class="number">4k</span>;</span><br><span class="line">       <span class="attribute">proxy_buffers</span> <span class="number">4</span> <span class="number">32k</span>;</span><br><span class="line">       <span class="attribute">proxy_busy_buffers_size</span> <span class="number">64k</span>;</span><br><span class="line">       <span class="attribute">proxy_temp_file_write_size</span> <span class="number">64k</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/linux/webterminal/shellinabox/" data-id="ckz5mgqkd000sbeoi3o8a8288" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/VSCode%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/VSCode%E9%85%8D%E7%BD%AEJava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/code-server/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/dcoker/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

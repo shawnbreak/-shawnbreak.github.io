@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="OpenSSHssh1ssh -i ~&#x2F;.ssh&#x2F;id_rsa root@host  sshdssh_configsshd_configssh-agent OpenSSH authentication agent  windows 12Set-Service -Name ssh-agent -StartupType ManualStart-Service ssh-agent  用途:  1.不需要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/02/02/devops/openssh/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="OpenSSHssh1ssh -i ~&#x2F;.ssh&#x2F;id_rsa root@host  sshdssh_configsshd_configssh-agent OpenSSH authentication agent  windows 12Set-Service -Name ssh-agent -StartupType ManualStart-Service ssh-agent  用途:  1.不需要">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-02T14:05:22.678Z">
+<meta property="article:modified_time" content="2022-02-02T14:05:22.678Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-devops/openssh" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/devops/openssh/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="OpenSSH"><a href="#OpenSSH" class="headerlink" title="OpenSSH"></a>OpenSSH</h1><h2 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -i ~/.ssh/id_rsa root@host</span><br></pre></td></tr></table></figure>
+
+<h2 id="sshd"><a href="#sshd" class="headerlink" title="sshd"></a>sshd</h2><h2 id="ssh-config"><a href="#ssh-config" class="headerlink" title="ssh_config"></a>ssh_config</h2><h2 id="sshd-config"><a href="#sshd-config" class="headerlink" title="sshd_config"></a>sshd_config</h2><h2 id="ssh-agent"><a href="#ssh-agent" class="headerlink" title="ssh-agent"></a>ssh-agent</h2><p> OpenSSH authentication agent </p>
+<p>windows</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set-Service -Name ssh-agent -StartupType Manual</span><br><span class="line">Start-Service ssh-agent</span><br></pre></td></tr></table></figure>
+
+<p>用途: </p>
+<p>1.不需要用 -i 指定密钥，ssh-agent会帮我们选择</p>
+<p>2.设置了pass phrase的话，不用每次都输入pass phrase, ssh-agent会帮我们记住</p>
+<h2 id="ssh-add"><a href="#ssh-add" class="headerlink" title="ssh-add"></a>ssh-add</h2><p> adds private key identities to the OpenSSH authentication agent </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-add ~/.ssh/id_rsa <span class="comment"># 添加</span></span><br><span class="line">ssh-add -l <span class="comment"># 查看 </span></span><br><span class="line">ssh-add -d ~/.ssh/id_rsa <span class="comment"># 删除</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="sftp"><a href="#sftp" class="headerlink" title="sftp"></a>sftp</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sftp root@localhost</span><br><span class="line"></span><br><span class="line">get -r folder</span><br><span class="line">put -r folder</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="scp"><a href="#scp" class="headerlink" title="scp"></a>scp</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r /home/administrator/news.txt root@192.168.6.129:/etc/squid</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="ssh-keygen"><a href="#ssh-keygen" class="headerlink" title="ssh-keygen"></a>ssh-keygen</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen <span class="comment"># 默认配置,按提示输入信息</span></span><br><span class="line">ssh-keygen -t rsa -b 1024 -f filename -P passphrase -C <span class="string">&quot;comment&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>安装公钥</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="ssh-keyscan"><a href="#ssh-keyscan" class="headerlink" title="ssh-keyscan"></a>ssh-keyscan</h2><p> Utility for gathering public host keys from a number of hosts </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keyscan hostlist</span><br><span class="line">ssh-keyscan -t rsa hostlist</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="sftp-server"><a href="#sftp-server" class="headerlink" title="sftp-server"></a>sftp-server</h2><h2 id="ssh-keysign"><a href="#ssh-keysign" class="headerlink" title="ssh-keysign"></a>ssh-keysign</h2><h2 id="免密登录"><a href="#免密登录" class="headerlink" title="免密登录"></a>免密登录</h2><p>1.生成密钥对(在自己的电脑上)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
+
+<p>2.添加到<code>~/.ssh/config</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Host *</span><br><span class="line">	</span><br><span class="line">Host aliubuntu</span><br><span class="line">    HostName 39.108.88.198</span><br><span class="line">    Port 22</span><br><span class="line">    User root</span><br><span class="line">    IdentityFile ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
+
+<p>3.将公钥写到服务器~&#x2F;.ssh&#x2F;authorized_keys</p>
+<p>4.服务器端设置sshd</p>
+<p>&#x2F;etc&#x2F;ssh&#x2F;sshd_config</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 取消注释下面这行</span></span><br><span class="line">AuthorizedKeysFile      .ssh/authorized_keys .ssh/authorized_keys2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li><p>现在可在自己的电脑上免密登录</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh aliubuntu</span><br><span class="line">sftp aliubuntu</span><br><span class="line">scp test.txt aliubuntu:~/</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="ssh-copy-id"><a href="#ssh-copy-id" class="headerlink" title="ssh-copy-id"></a>ssh-copy-id</h2><p>solution 1</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">choco install ssh-copy-id -y</span><br><span class="line">ssh-copy-id -i .ssh/id_rsa.pub root@host</span><br></pre></td></tr></table></figure>
+
+<p>solution 2</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> .ssh/id_rsa.pub | ssh root@host <span class="string">&quot;cat &gt;&gt; .ssh/authorized_keys&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="端口转发"><a href="#端口转发" class="headerlink" title="端口转发"></a>端口转发</h2><h3 id="动态转发"><a href="#动态转发" class="headerlink" title="动态转发"></a>动态转发</h3><p>要访问的目标服务器不确定，端口也不确定。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh -D 2121 tunnel-host -N</span><br><span class="line"><span class="comment"># -D 动态转发</span></span><br><span class="line"><span class="comment"># -N 只转发，不登录shell</span></span><br></pre></td></tr></table></figure>
+
+<p>采用socks5协议。</p>
+<p>建立本地与ssh服务器的加密连接，将本地特定端口的访问都转发到ssh服务器。可以当作简单的代理服务器。</p>
+<p>使用案例：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -x socks5://localhost:2121 http://www.example.com</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="本地转发"><a href="#本地转发" class="headerlink" title="本地转发"></a>本地转发</h3><p>目标服务器的端口确定。</p>
+<p>在本地执行转发命令。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 2121:www.example.com:80 tunnel-host -N</span><br><span class="line">curl http://localhost:2121</span><br></pre></td></tr></table></figure>
+
+<p>访问本地2121端口跟访问<a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a> 80端口效果一样。</p>
+<h3 id="远程转发"><a href="#远程转发" class="headerlink" title="远程转发"></a>远程转发</h3><p>目标服务器的端口确定。</p>
+<p>在远程（跳板机）执行转发命令。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 再跳板机执行</span></span><br><span class="line">ssh -R 2121:www.example.com:80 <span class="built_in">local</span> -N</span><br><span class="line"><span class="comment"># 在本地执行</span></span><br><span class="line">curl http://localhost:2121</span><br></pre></td></tr></table></figure>
+
+<p>访问本地2121端口跟访问<a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a> 80端口效果一样。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/devops/openssh/" data-id="ckz5mgqk4000cbeoi3x6qhxby" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/02/devops/ohmyzsh/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/02/02/devops/ssh%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/VSCode%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/VSCode%E9%85%8D%E7%BD%AEJava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/code-server/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/dcoker/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

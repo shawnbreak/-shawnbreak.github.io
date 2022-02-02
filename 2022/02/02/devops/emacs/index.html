@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="moveC-n, C-p: move by lineC-f, C-b: move by characterM-f, M-b: move by wordC-a, C-e: move to the start or end of the line  C-v, M-v: move by screenC-l: move the cursorline to the middle, top, bottom e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/02/02/devops/emacs/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="moveC-n, C-p: move by lineC-f, C-b: move by characterM-f, M-b: move by wordC-a, C-e: move to the start or end of the line  C-v, M-v: move by screenC-l: move the cursorline to the middle, top, bottom e">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-02T14:05:22.678Z">
+<meta property="article:modified_time" content="2022-02-02T14:05:22.678Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-devops/emacs" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/devops/emacs/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="move"><a href="#move" class="headerlink" title="move"></a>move</h1><p>C-n, C-p: move by line<br>C-f, C-b: move by character<br>M-f, M-b: move by word<br>C-a, C-e: move to the start or end of the line </p>
+<p>C-v, M-v: move by screen<br>C-l: move the cursorline to the middle, top, bottom</p>
+<h1 id="edit"><a href="#edit" class="headerlink" title="edit"></a>edit</h1><p>C-w<br>C-d<br>C-j<br>C-k<br>C-y</p>
+<h1 id="zoom"><a href="#zoom" class="headerlink" title="zoom"></a>zoom</h1><p>C-x C-+: zoom in<br>C-x C–: zoom out</p>
+<h1 id="search"><a href="#search" class="headerlink" title="search"></a>search</h1><p>C-s<br>C-r</p>
+<h1 id="file"><a href="#file" class="headerlink" title="file"></a>file</h1><p>C-x C-f</p>
+<h1 id="directory"><a href="#directory" class="headerlink" title="directory"></a>directory</h1><p>C-x d</p>
+<h1 id="save"><a href="#save" class="headerlink" title="save"></a>save</h1><p>C-x s</p>
+<h1 id="buffer"><a href="#buffer" class="headerlink" title="buffer"></a>buffer</h1><p>C-x C-b<br>C-x b <buffrename><br>C-x k</p>
+<h1 id="window"><a href="#window" class="headerlink" title="window"></a>window</h1><p>C-x 1<br>C-x 2<br>C-x 3<br>C-x o</p>
+<p>C-M-v</p>
+<h1 id="frames"><a href="#frames" class="headerlink" title="frames"></a>frames</h1><p>C-x 5 2<br>C-x 5 0</p>
+<h1 id="org-mode"><a href="#org-mode" class="headerlink" title="org-mode"></a>org-mode</h1><h1 id="init-el"><a href="#init-el" class="headerlink" title="init.el"></a>init.el</h1><p>runemacs -q -l init.el</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">(<span class="name">setq</span> inhibit-startup-message <span class="literal">t</span>)</span><br><span class="line"></span><br><span class="line">(<span class="name">scroll-bar-mode</span> <span class="number">-1</span>)     <span class="comment">; Disable visibale scrollbar</span></span><br><span class="line">(<span class="name">tool-bar-mode</span> <span class="number">-1</span>)       <span class="comment">; Disable the toolbar</span></span><br><span class="line">(<span class="name">tooltip-mode</span> <span class="number">-1</span>)        <span class="comment">; Disable tooltips</span></span><br><span class="line">(<span class="name">set-fringe-mode</span> <span class="number">10</span>)     <span class="comment">; Give some breathing room</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;; Set up the visible bell</span></span><br><span class="line">(<span class="name">menu-bar-mode</span> <span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line">(<span class="name">setq</span> visible-bell <span class="literal">t</span>)</span><br><span class="line"></span><br><span class="line">(<span class="name">set-face-attribute</span> &#x27;default <span class="literal">nil</span> <span class="symbol">:font</span> <span class="string">&quot;Consolas&quot;</span> <span class="symbol">:height</span> <span class="number">150</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">(<span class="name">load-theme</span> &#x27;tango-dark)</span><br><span class="line"></span><br><span class="line"><span class="comment">;; Make ESC quit prompts</span></span><br><span class="line">(<span class="name">global-set-key</span> (<span class="name">kbd</span> <span class="string">&quot;&lt;escape&gt;&quot;</span>) &#x27;keyboard-escape-quit)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">;; (clomun-number-mode)</span></span><br><span class="line">(<span class="name">global-display-line-numbers-mode</span> <span class="literal">t</span>)</span><br><span class="line"></span><br><span class="line">(<span class="name">dolist</span> (<span class="name">mode</span> &#x27;(shell-mode-hook</span><br><span class="line">		term-mode-hook</span><br><span class="line">		org-mode-hook))</span><br><span class="line">  (<span class="name">add-hook</span> mode (<span class="name">lambda</span> () (<span class="name">display-line-numbers-mode</span> <span class="number">0</span>))))</span><br><span class="line"></span><br><span class="line"><span class="comment">;; Initialize package sources</span></span><br><span class="line">(<span class="name">require</span> &#x27;package)</span><br><span class="line"></span><br><span class="line">(<span class="name">setq</span> package-archives &#x27;((<span class="string">&quot;melpa&quot;</span> . <span class="string">&quot;https://mepa.org/packages/&quot;</span>)</span><br><span class="line">			 (<span class="string">&quot;org&quot;</span> . <span class="string">&quot;https://orgmode.org/elpa/&quot;</span>)</span><br><span class="line">			 (<span class="string">&quot;elpa&quot;</span> . <span class="string">&quot;https://elpa.gnu.org/packages/&quot;</span>)))</span><br><span class="line"></span><br><span class="line">(<span class="name">package-initialize</span>)</span><br><span class="line">(<span class="name">unless</span> package-archive-contents</span><br><span class="line">  (<span class="name">package-refresh-contents</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">;; ;; Initialize use-package on non-Linux platforms</span></span><br><span class="line"><span class="comment">;; (unless (package-installed-p &#x27;use-package)</span></span><br><span class="line"><span class="comment">;;  (package-install &#x27;use-package))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;; (require &#x27;use-package)</span></span><br><span class="line"><span class="comment">;; (setq use-package-always-ensure t)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;; (use-package command-log-mode)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="多行编辑"><a href="#多行编辑" class="headerlink" title="多行编辑"></a>多行编辑</h1><table>
+<thead>
+<tr>
+<th align="left">列编辑快捷键</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">C-x r k</td>
+<td align="left">剪切一个矩形块</td>
+</tr>
+<tr>
+<td align="left">C-x r y</td>
+<td align="left">粘贴一个矩形块</td>
+</tr>
+<tr>
+<td align="left">C-x r o</td>
+<td align="left">插入一个矩形块</td>
+</tr>
+<tr>
+<td align="left">C-x r c</td>
+<td align="left">清除一个矩形块(使其变成空白)</td>
+</tr>
+<tr>
+<td align="left">C-x r t</td>
+<td align="left">在选定区域的所有列前插入相同的字符串</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">快捷键</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">C-c f</td>
+<td align="left">按照语义扩大选中区域</td>
+</tr>
+<tr>
+<td align="left">C-c b</td>
+<td align="left">按照语义缩小选中区域</td>
+</tr>
+<tr>
+<td align="left">C-c i</td>
+<td align="left">选中该 buffer 中所有和选中区域相同的内容</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/devops/emacs/" data-id="ckz5mgqjx0005beoi8juqdx11" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/02/devops/dcoker/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/02/02/devops/idea/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/VSCode%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/VSCode%E9%85%8D%E7%BD%AEJava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/code-server/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/dcoker/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

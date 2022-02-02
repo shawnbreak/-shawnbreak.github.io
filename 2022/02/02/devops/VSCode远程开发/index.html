@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="VS Code 远程开发[TOC] 配置步骤1、先配置客户端 2、服务器端安装vs coe server 3、安装服务器端开发环境和插件 客户端1、vscode最新版 2.、插件：  remote ssh remote ssh ： edit configuration files  3、open ssh客户端（windows 10自带） 服务器端 vs code server 的安装服务器有网络服">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/02/02/devops/VSCode%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="VS Code 远程开发[TOC] 配置步骤1、先配置客户端 2、服务器端安装vs coe server 3、安装服务器端开发环境和插件 客户端1、vscode最新版 2.、插件：  remote ssh remote ssh ： edit configuration files  3、open ssh客户端（windows 10自带） 服务器端 vs code server 的安装服务器有网络服">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-02T14:05:22.678Z">
+<meta property="article:modified_time" content="2022-02-02T14:05:22.678Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-devops/VSCode远程开发" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/devops/VSCode%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="VS-Code-远程开发"><a href="#VS-Code-远程开发" class="headerlink" title="VS Code 远程开发"></a>VS Code 远程开发</h1><p>[TOC]</p>
+<h2 id="配置步骤"><a href="#配置步骤" class="headerlink" title="配置步骤"></a>配置步骤</h2><p>1、先配置客户端</p>
+<p>2、服务器端安装vs coe server</p>
+<p>3、安装服务器端开发环境和插件</p>
+<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p>1、vscode最新版</p>
+<p>2.、插件：</p>
+<ul>
+<li>remote ssh</li>
+<li>remote ssh ： edit configuration files</li>
+</ul>
+<p>3、open ssh客户端（windows 10自带）</p>
+<h2 id="服务器端-vs-code-server-的安装"><a href="#服务器端-vs-code-server-的安装" class="headerlink" title="服务器端 vs code server 的安装"></a>服务器端 vs code server 的安装</h2><h3 id="服务器有网络"><a href="#服务器有网络" class="headerlink" title="服务器有网络"></a>服务器有网络</h3><p>服务器端有网络的情况下会自动去网上下载安装</p>
+<h3 id="服务器无网络"><a href="#服务器无网络" class="headerlink" title="服务器无网络"></a>服务器无网络</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commit_id=a0479759d6e9ea56afa657e454193f72aef85bd0</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>First get commit id</li>
+<li>Download vscode server from url: <code>https://update.code.visualstudio.com/commit:$&#123;commit_id&#125;/server-linux-x64/stable</code></li>
+<li>Upload the <code>vscode-server-linux-x64.tar.gz</code> to server</li>
+<li>Unzip the downloaded <code>vscode-server-linux-x64.tar.gz</code> to <code>~/.vscode-server/bin/$&#123;commit_id&#125;</code> without vscode-server-linux-x64 dir</li>
+<li>Create <code>0</code> file under <code>~/.vscode-server/bin/$&#123;commit_id&#125;</code></li>
+</ol>
+<p>ref: <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/56671520/how-can-i-install-vscode-server-in-linux-offline">https://stackoverflow.com/questions/56671520/how-can-i-install-vscode-server-in-linux-offline</a></p>
+<p>关于commit_id：</p>
+<p>1.连接失败的返回结果中包含commit_id</p>
+<h2 id="无网络vscode插件安装"><a href="#无网络vscode插件安装" class="headerlink" title="无网络vscode插件安装"></a>无网络vscode插件安装</h2><p>1、获取插件， 如：octref.vetur-0.27.1.vsix</p>
+<p>2、按<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>p</kbd>，执行 install from vsix，然后选择插件路径</p>
+<h2 id="服务器端"><a href="#服务器端" class="headerlink" title="服务器端"></a>服务器端</h2><p>1、open ssh服务器端（Linux自带）</p>
+<p>2、插件：</p>
+<pre><code>-  Java Language support for Java 0.64 (Redhat) (注意：自0.65起需要最低JAVA11的支持)
+-  Debugger For Java
+-  Vetur
+</code></pre>
+<p>3、开发环境：</p>
+<ul>
+<li><p>jdk 8</p>
+</li>
+<li><p>node 14</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/devops/VSCode%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/" data-id="ckz5mgqjt0001beoig490hb33" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/02/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/02/02/devops/VSCode%E9%85%8D%E7%BD%AEJava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/VSCode%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/VSCode%E9%85%8D%E7%BD%AEJava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/code-server/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/devops/dcoker/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
