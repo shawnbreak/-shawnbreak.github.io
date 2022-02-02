@@ -1,3 +1,6 @@
+---
+title: openssh
+---
 # OpenSSH
 
 ## ssh

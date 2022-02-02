@@ -1,3 +1,6 @@
+---
+title: shc
+---
 ## shell脚本加密
 
 

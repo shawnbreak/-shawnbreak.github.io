@@ -1,3 +1,6 @@
+---
+title: cockpit
+---
 # cockpit
 
 [toc]

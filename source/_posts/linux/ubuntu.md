@@ -1,3 +1,6 @@
+---
+title: ubuntu
+---
 # ubuntu 安装
 
 ###  windows10 + ubuntu18.04双系统，重启关机卡的问题

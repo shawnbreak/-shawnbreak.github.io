@@ -1,3 +1,6 @@
+---
+title: emacs
+---
 # move
 C-n, C-p: move by line
 C-f, C-b: move by character

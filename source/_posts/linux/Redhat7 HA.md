@@ -1,3 +1,6 @@
+---
+title: Redhat7 HA
+---
 # 配置Redhat7高可用、浮动IP
 
 ## 准备

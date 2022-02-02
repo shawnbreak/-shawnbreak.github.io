@@ -1,3 +1,6 @@
+---
+title: oh-my-zsh
+---
 # oh-my-zsh
 
 国内

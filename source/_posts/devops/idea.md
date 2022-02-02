@@ -1,3 +1,6 @@
+---
+title: idea
+---
 # idea快捷键
 
  Alt + Enter

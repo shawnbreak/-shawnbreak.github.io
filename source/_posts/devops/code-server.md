@@ -1,3 +1,6 @@
+---
+title: code-server
+---
 # Code-server
 
 

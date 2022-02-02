@@ -1,3 +1,6 @@
+---
+title: Redhat 开发环境配置
+---
 # redhat7.4 开发环境配置
 
 [TOC]

@@ -1,3 +1,7 @@
+---
+title: ipmitool
+---
+
 # IPMI
 
 >  IPMI(Intelligent Platform Management Interface) 即智能平台管理接口。是使硬件管理具备智能化的新一代通用接口标准。
