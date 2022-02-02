@@ -1,0 +1,33 @@
+#+title: tcpdump dhcp抓包实战
+
+
+* 获取特定mac地址的包
+比如获取mac地址为bb:bb:3e:0c:cf:08的dhcp包，可以通过udp[38:4] = 0x3e0ccf08来过滤
+注意tcpdump最大只能匹配4个字节，而mac地址有6个字节，所以我们使用mac地址的后4个字节。后4个字节更有区分度。
+
+#+begin_src bash
+tcpdump -i eth0 -nnvv '((port 67 or port 68) and (udp[38:4] = 0x3e0ccf08))' -w dhcp_dump.cap
+#+end_src
+
+* 通过udp[8:1] = 0x1过滤获取DISCOVER包
+- DISCOVE: 0x1
+- OFFER: 0x2
+- REQUEST: 0x3
+- DECLINE: 0x4
+- ACK: 0x5 
+
+#+begin_src bash
+tcpdump -i eth0 -nnvv '((port 67 or port 68) and (udp[8:1] = 0x1))'
+#+end_src
+
+* tcpdump将抓包保存到文件
+
+#+begin_src bash
+tcpdump -i eth0 -w test.cap
+#+end_src
+
+* 读取抓包文件
+
+#+begin_src bash
+tcpudump -r test.cap
+#+end_src
