@@ -71,15 +71,774 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-linux/centos7" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-devops/openssh" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2022/02/02/linux/centos7/" class="article-date">
-  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
+    <a href="/2022/02/02/devops/openssh/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:31:24.860Z" itemprop="datePublished">2022-02-02</time>
 </a>
     
   </div>
   <div class="article-inner">
     
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/02/devops/openssh/">openssh</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="OpenSSH"><a href="#OpenSSH" class="headerlink" title="OpenSSH"></a>OpenSSH</h1><h2 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -i ~/.ssh/id_rsa root@host</span><br></pre></td></tr></table></figure>
+
+<h2 id="sshd"><a href="#sshd" class="headerlink" title="sshd"></a>sshd</h2><h2 id="ssh-config"><a href="#ssh-config" class="headerlink" title="ssh_config"></a>ssh_config</h2><h2 id="sshd-config"><a href="#sshd-config" class="headerlink" title="sshd_config"></a>sshd_config</h2><h2 id="ssh-agent"><a href="#ssh-agent" class="headerlink" title="ssh-agent"></a>ssh-agent</h2><p> OpenSSH authentication agent </p>
+<p>windows</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set-Service -Name ssh-agent -StartupType Manual</span><br><span class="line">Start-Service ssh-agent</span><br></pre></td></tr></table></figure>
+
+<p>用途: </p>
+<p>1.不需要用 -i 指定密钥，ssh-agent会帮我们选择</p>
+<p>2.设置了pass phrase的话，不用每次都输入pass phrase, ssh-agent会帮我们记住</p>
+<h2 id="ssh-add"><a href="#ssh-add" class="headerlink" title="ssh-add"></a>ssh-add</h2><p> adds private key identities to the OpenSSH authentication agent </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-add ~/.ssh/id_rsa <span class="comment"># 添加</span></span><br><span class="line">ssh-add -l <span class="comment"># 查看 </span></span><br><span class="line">ssh-add -d ~/.ssh/id_rsa <span class="comment"># 删除</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="sftp"><a href="#sftp" class="headerlink" title="sftp"></a>sftp</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sftp root@localhost</span><br><span class="line"></span><br><span class="line">get -r folder</span><br><span class="line">put -r folder</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="scp"><a href="#scp" class="headerlink" title="scp"></a>scp</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r /home/administrator/news.txt root@192.168.6.129:/etc/squid</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="ssh-keygen"><a href="#ssh-keygen" class="headerlink" title="ssh-keygen"></a>ssh-keygen</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen <span class="comment"># 默认配置,按提示输入信息</span></span><br><span class="line">ssh-keygen -t rsa -b 1024 -f filename -P passphrase -C <span class="string">&quot;comment&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>安装公钥</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="ssh-keyscan"><a href="#ssh-keyscan" class="headerlink" title="ssh-keyscan"></a>ssh-keyscan</h2><p> Utility for gathering public host keys from a number of hosts </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keyscan hostlist</span><br><span class="line">ssh-keyscan -t rsa hostlist</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="sftp-server"><a href="#sftp-server" class="headerlink" title="sftp-server"></a>sftp-server</h2><h2 id="ssh-keysign"><a href="#ssh-keysign" class="headerlink" title="ssh-keysign"></a>ssh-keysign</h2><h2 id="免密登录"><a href="#免密登录" class="headerlink" title="免密登录"></a>免密登录</h2><p>1.生成密钥对(在自己的电脑上)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
+
+<p>2.添加到<code>~/.ssh/config</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Host *</span><br><span class="line">	</span><br><span class="line">Host aliubuntu</span><br><span class="line">    HostName 39.108.88.198</span><br><span class="line">    Port 22</span><br><span class="line">    User root</span><br><span class="line">    IdentityFile ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
+
+<p>3.将公钥写到服务器~&#x2F;.ssh&#x2F;authorized_keys</p>
+<p>4.服务器端设置sshd</p>
+<p>&#x2F;etc&#x2F;ssh&#x2F;sshd_config</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 取消注释下面这行</span></span><br><span class="line">AuthorizedKeysFile      .ssh/authorized_keys .ssh/authorized_keys2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li><p>现在可在自己的电脑上免密登录</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh aliubuntu</span><br><span class="line">sftp aliubuntu</span><br><span class="line">scp test.txt aliubuntu:~/</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="ssh-copy-id"><a href="#ssh-copy-id" class="headerlink" title="ssh-copy-id"></a>ssh-copy-id</h2><p>solution 1</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">choco install ssh-copy-id -y</span><br><span class="line">ssh-copy-id -i .ssh/id_rsa.pub root@host</span><br></pre></td></tr></table></figure>
+
+<p>solution 2</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> .ssh/id_rsa.pub | ssh root@host <span class="string">&quot;cat &gt;&gt; .ssh/authorized_keys&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="端口转发"><a href="#端口转发" class="headerlink" title="端口转发"></a>端口转发</h2><h3 id="动态转发"><a href="#动态转发" class="headerlink" title="动态转发"></a>动态转发</h3><p>要访问的目标服务器不确定，端口也不确定。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh -D 2121 tunnel-host -N</span><br><span class="line"><span class="comment"># -D 动态转发</span></span><br><span class="line"><span class="comment"># -N 只转发，不登录shell</span></span><br></pre></td></tr></table></figure>
+
+<p>采用socks5协议。</p>
+<p>建立本地与ssh服务器的加密连接，将本地特定端口的访问都转发到ssh服务器。可以当作简单的代理服务器。</p>
+<p>使用案例：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -x socks5://localhost:2121 http://www.example.com</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="本地转发"><a href="#本地转发" class="headerlink" title="本地转发"></a>本地转发</h3><p>目标服务器的端口确定。</p>
+<p>在本地执行转发命令。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 2121:www.example.com:80 tunnel-host -N</span><br><span class="line">curl http://localhost:2121</span><br></pre></td></tr></table></figure>
+
+<p>访问本地2121端口跟访问<a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a> 80端口效果一样。</p>
+<h3 id="远程转发"><a href="#远程转发" class="headerlink" title="远程转发"></a>远程转发</h3><p>目标服务器的端口确定。</p>
+<p>在远程（跳板机）执行转发命令。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 再跳板机执行</span></span><br><span class="line">ssh -R 2121:www.example.com:80 <span class="built_in">local</span> -N</span><br><span class="line"><span class="comment"># 在本地执行</span></span><br><span class="line">curl http://localhost:2121</span><br></pre></td></tr></table></figure>
+
+<p>访问本地2121端口跟访问<a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a> 80端口效果一样。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/devops/openssh/" data-id="ckz5ne7yn000c99ojhayv14kg" data-title="openssh" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-devops/ssh端口转发" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/devops/ssh%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:31:24.860Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/02/devops/ssh%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/">ssh 端口转发</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="ssh端口转发"><a href="#ssh端口转发" class="headerlink" title="ssh端口转发"></a>ssh端口转发</h1><h2 id="本地转发"><a href="#本地转发" class="headerlink" title="本地转发"></a>本地转发</h2><h2 id="远程转发"><a href="#远程转发" class="headerlink" title="远程转发"></a>远程转发</h2><h2 id="动态转发"><a href="#动态转发" class="headerlink" title="动态转发"></a>动态转发</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/devops/ssh%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" data-id="ckz5ne7yo000d99ojgvdw7iyd" data-title="ssh 端口转发" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-devops/svn" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/devops/svn/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:31:24.860Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/02/devops/svn/">svn</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="svn"><a href="#svn" class="headerlink" title="svn"></a>svn</h1><p>[TOC]</p>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><h3 id="svn-import"><a href="#svn-import" class="headerlink" title="svn import"></a>svn import</h3><p>把现有的项目导入到仓库中</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn import /myproject https://svn.example.com/svn/repo/project1</span><br></pre></td></tr></table></figure>
+
+<h3 id="svn-list"><a href="#svn-list" class="headerlink" title="svn list"></a>svn list</h3><p>查看仓库文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn list https://svn.example.com/svn/project1</span><br></pre></td></tr></table></figure>
+
+<h3 id="svn-checkout"><a href="#svn-checkout" class="headerlink" title="svn checkout"></a>svn checkout</h3><p>创建一个工作副本</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn checkout https://svn.example.com/svn/project1/trunk</span><br></pre></td></tr></table></figure>
+
+<h3 id="基本工作流"><a href="#基本工作流" class="headerlink" title="基本工作流"></a>基本工作流</h3><h4 id="svn-update"><a href="#svn-update" class="headerlink" title="svn update"></a>svn update</h4><p>拉取项目的最新更行</p>
+<h4 id="svn-add-svn-delete-svn-copy-svn-move"><a href="#svn-add-svn-delete-svn-copy-svn-move" class="headerlink" title="svn add, svn delete, svn copy, svn move"></a>svn add, svn delete, svn copy, svn move</h4><p>项目编辑，更改等操作</p>
+<h4 id="svn-status-svn-diff"><a href="#svn-status-svn-diff" class="headerlink" title="svn status, svn diff"></a>svn status, svn diff</h4><p>查看更改内容</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ svn status</span><br><span class="line">? scratch.c</span><br><span class="line">A stuff/loot</span><br><span class="line">A stuff/loot/new.c</span><br><span class="line">D stuff/old.c</span><br><span class="line">M bar.c</span><br></pre></td></tr></table></figure>
+
+<p>?  item</p>
+<p>​    没有加入版本控制的文件</p>
+<p>A item</p>
+<p>​    加如到仓库的文件，svn add的结果， svn commit后才生效</p>
+<p>C item</p>
+<p>​    冲突</p>
+<p>D item</p>
+<p>​    从仓库删除的文件， svn delete的结果，svn commit才生效</p>
+<p>M item</p>
+<p>​    被改变的文件</p>
+<h4 id="svn-revert"><a href="#svn-revert" class="headerlink" title="svn revert"></a>svn revert</h4><p>回退错误的更改</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ svn status README</span><br><span class="line">M README</span><br><span class="line">$ svn revert README</span><br><span class="line">Reverted <span class="string">&#x27;README&#x27;</span></span><br><span class="line">$ svn status README</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+
+<h4 id="svn-update-svn-resolve"><a href="#svn-update-svn-resolve" class="headerlink" title="svn update, svn resolve"></a>svn update, svn resolve</h4><h4 id="svn-commit"><a href="#svn-commit" class="headerlink" title="svn commit"></a>svn commit</h4><h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><h3 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ svn copy http://svn.example.com/repos/calc/trunk \</span><br><span class="line">http://svn.example.com/repos/calc/branches/my-calc-branch \</span><br><span class="line">-m <span class="string">&quot;Creating a private branch of /calc/trunk.&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="在分支上工作"><a href="#在分支上工作" class="headerlink" title="在分支上工作"></a>在分支上工作</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn checkout http://svn.example.com/repos/calc/branches/my-calc-branch</span><br></pre></td></tr></table></figure>
+
+<h3 id="保持分支同步"><a href="#保持分支同步" class="headerlink" title="保持分支同步:"></a>保持分支同步:</h3><p>将主干的修改同步到分支</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/home/user/my-calc-branch</span><br><span class="line">$ svn merge ^/calc/trunk</span><br><span class="line">--- Merging r345 through r356 into <span class="string">&#x27;.&#x27;</span>:</span><br><span class="line">U button.c</span><br><span class="line">U integer.c</span><br><span class="line">--- Recording mergeinfo <span class="keyword">for</span> merge of r345 through r356 into <span class="string">&#x27;.&#x27;</span>:</span><br><span class="line">U .</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+
+<h3 id="将分支修改合并到主干"><a href="#将分支修改合并到主干" class="headerlink" title="将分支修改合并到主干"></a>将分支修改合并到主干</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/home/user/calc-trunk</span><br><span class="line">$ svn update <span class="comment"># (make sure the working copy is up to date)</span></span><br><span class="line">Updating <span class="string">&#x27;.&#x27;</span>:</span><br><span class="line">At revision 390.</span><br><span class="line">$ svn merge --reintegrate ^/calc/branches/my-calc-branch</span><br><span class="line">--- Merging differences between repository URLs into <span class="string">&#x27;.&#x27;</span>:</span><br><span class="line">U button.c</span><br><span class="line">U integer.c</span><br><span class="line">U Makefile</span><br><span class="line">--- Recording mergeinfo <span class="keyword">for</span> merge between repository URLs into <span class="string">&#x27;.&#x27;</span>:</span><br><span class="line">U .</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ <span class="comment"># build, test, verify, ...</span></span><br><span class="line">$ svn commit -m <span class="string">&quot;Merge my-calc-branch back into trunk!&quot;</span></span><br><span class="line">Sending .</span><br><span class="line">Sending button.c</span><br><span class="line">Sending integer.c</span><br><span class="line">Sending Makefile</span><br><span class="line">Transmitting file data ..</span><br><span class="line">Committed revision 391.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ svn delete ^/calc/branches/my-calc-branch \</span><br><span class="line">-m <span class="string">&quot;Remove my-calc-branch, reintegrated with trunk in r391.&quot;</span></span><br><span class="line">Committed revision 392.</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="svn仓库管理"><a href="#svn仓库管理" class="headerlink" title="svn仓库管理"></a>svn仓库管理</h2><h3 id="svn-仓库构成"><a href="#svn-仓库构成" class="headerlink" title="svn 仓库构成"></a>svn 仓库构成</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls repos</span><br><span class="line">conf/	db/  format/  hooks/  locks/  README.txt	</span><br></pre></td></tr></table></figure>
+
+<p>conf&#x2F;</p>
+<p>​        各种配置文件</p>
+<p>db&#x2F;</p>
+<p>​        版本控制的文件</p>
+<p>format</p>
+<p>​        描述仓库的结构</p>
+<p>hooks&#x2F;</p>
+<p>​        钩子脚本</p>
+<p>locks&#x2F;</p>
+<p>​        管理被锁的文件，访问控制</p>
+<p>README.txt</p>
+<p>​        简单说明</p>
+<h3 id="推荐的项目结构"><a href="#推荐的项目结构" class="headerlink" title="推荐的项目结构"></a>推荐的项目结构</h3><p>&#x2F;</p>
+<p>​    project&#x2F;</p>
+<p>​            trunk&#x2F; (主要开发)</p>
+<p>​            tags&#x2F; （快照，从不改变的）</p>
+<p>​            branches&#x2F; (主要开发的分支)</p>
+<h3 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h3><ul>
+<li>Berkeley DB</li>
+<li>FSFS（推荐）</li>
+</ul>
+<h3 id="创建和配置仓库"><a href="#创建和配置仓库" class="headerlink" title="创建和配置仓库"></a>创建和配置仓库</h3><h4 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svnadmin create /var/svn/repos</span><br></pre></td></tr></table></figure>
+
+<h4 id="实现钩子"><a href="#实现钩子" class="headerlink" title="实现钩子"></a>实现钩子</h4><p>pre-hooks</p>
+<p>post-hooks</p>
+<p>推荐实现方式：从现有模板copy一份修改</p>
+<blockquote>
+<p>注意：钩子的执行环境没有任何环境变量，所以都需要手动指定</p>
+</blockquote>
+<h3 id="仓库维护"><a href="#仓库维护" class="headerlink" title="仓库维护"></a>仓库维护</h3><h4 id="svnadmin"><a href="#svnadmin" class="headerlink" title="svnadmin"></a>svnadmin</h4><p>最基础的管理工具，包括仓库的创建等</p>
+<h4 id="svnlook"><a href="#svnlook" class="headerlink" title="svnlook"></a>svnlook</h4><p>查看仓库的不同版本和事务，不会修改仓库</p>
+<h4 id="svndumpfilter"><a href="#svndumpfilter" class="headerlink" title="svndumpfilter"></a>svndumpfilter</h4><p>仓库清理工具</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">svndumpfilter exclude</span><br><span class="line">svndumpfilter include</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="svnrdump"><a href="#svnrdump" class="headerlink" title="svnrdump"></a>svnrdump</h4><h4 id="svnsync"><a href="#svnsync" class="headerlink" title="svnsync"></a>svnsync</h4><p>同步一个只读的镜像仓库</p>
+<h3 id="仓库配置"><a href="#仓库配置" class="headerlink" title="仓库配置"></a>仓库配置</h3><h4 id="svnserve"><a href="#svnserve" class="headerlink" title="svnserve"></a>svnserve</h4><p>最快，最简单</p>
+<p>安全性不高，如果只是在局域网内使用够了</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 服务端开始svn进程</span><br><span class="line">svnserv -d -r /var/svn</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 客户端使用</span><br><span class="line">svn checkout svn://host.example.com/project1</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="svnserve-over-ssh"><a href="#svnserve-over-ssh" class="headerlink" title="svnserve over ssh"></a>svnserve over ssh</h4><h4 id="The-apache-http-server"><a href="#The-apache-http-server" class="headerlink" title="The apache http server"></a>The apache http server</h4><p>有https加密，有apach日志系统</p>
+<p>大项目，需要连接到互联网用这个</p>
+<p>前提：httpd, mode_dav_svn</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/devops/svn/" data-id="ckz5ne7yp000e99ojfvme3cx1" data-title="svn" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux/HelloOS" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/linux/HelloOS/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:31:24.860Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/02/linux/HelloOS/">HelloOS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="操作系统实战-HelloOS"><a href="#操作系统实战-HelloOS" class="headerlink" title="操作系统实战 HelloOS"></a>操作系统实战 HelloOS</h1><p>实验环境vmware ubunt20</p>
+<h2 id="HelloOS下载与编译"><a href="#HelloOS下载与编译" class="headerlink" title="HelloOS下载与编译"></a>HelloOS下载与编译</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span></span><br><span class="line">make</span><br><span class="line">cp HellOS.bin /boot/</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="grub配置修改"><a href="#grub配置修改" class="headerlink" title="grub配置修改"></a>grub配置修改</h2><p>针对ubuntu20</p>
+<p>首先，ubuntu20默认不显示grub界面，修改配置&#x2F;etc&#x2F;default&#x2F;grub</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRUB_TIMEOUT-_STYLE=hidden</span></span><br><span class="line">GRUB_DEFAULT_TIMEOUT=30</span><br><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=<span class="string">&quot;text&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>添加menuentry, 在配置文件&#x2F;etc&#x2F;grub.d&#x2F;40_custom后追加</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">menuentry <span class="string">&#x27;HelloOS&#x27;</span> &#123;</span><br><span class="line">     insmod part_msdos <span class="comment">#GRUB加载分区模块识别分区</span></span><br><span class="line">     insmod ext2 <span class="comment">#GRUB加载ext文件系统模块识别ext文件系统</span></span><br><span class="line">     <span class="built_in">set</span> root=<span class="string">&#x27;hd0,msdos4&#x27;</span> <span class="comment">#注意boot目录挂载的分区，这是我机器上的情况</span></span><br><span class="line">     multiboot2 /boot/HelloOS.bin <span class="comment">#GRUB以multiboot2协议加载HelloOS.bin</span></span><br><span class="line">     boot <span class="comment">#GRUB启动HelloOS.bin</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使配置生效</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-grub</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>如果一开始忘记修改grub显示配置，会出现开机就是HelloOS，没有grub的引导界面。</p>
+<p>此时可以用光盘启动，然后选择try ubuntu进入live cd模式。</p>
+<p>进去后执行mount &#x2F;dev&#x2F;sda5 &#x2F;mnt，将系统挂载&#x2F;mnt目录，&#x2F;dev&#x2F;sda5是我安装目录</p>
+<p>chroort &#x2F;mnt 切换到之前的系统工作，然后i需改grub配置文件即可</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/linux/HelloOS/" data-id="ckz5ne7yp000f99oj4uuaglmq" data-title="HelloOS" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux/Linux编程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/linux/Linux%E7%BC%96%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:31:24.860Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/02/linux/Linux%E7%BC%96%E7%A8%8B/">Linux编程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux编程"><a href="#Linux编程" class="headerlink" title="Linux编程"></a>Linux编程</h1><h2 id="简单的模块"><a href="#简单的模块" class="headerlink" title="简单的模块"></a>简单的模块</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// filename: ex01_simple_module.c</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/init.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ex01_simple_module_init</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    printk(KERN_ALERT <span class="string">&quot;Inside the function %s\n&quot;</span>, __FUNCTION__);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ex01_simple_module_exit</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    printk(KERN_ALERT <span class="string">&quot;Inside the function %s\n&quot;</span>, __FUNCTION__);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(ex01_simple_module_init);</span><br><span class="line">module_exit(ex01_simple_module_exit);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj-m := ex01_simple_module.o</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">make -C /lib/modules/$(uname -r)/build M=<span class="variable">$PWD</span> modules</span><br><span class="line">insmod ex01_simple_module.ko</span><br><span class="line">lsmod</span><br><span class="line">rmmod ex01_simple_module.ko</span><br><span class="line"></span><br><span class="line">dmesg</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/linux/Linux%E7%BC%96%E7%A8%8B/" data-id="ckz5ne7yq000g99ojhmjve2ts" data-title="Linux编程" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux/Linux网卡命名规则" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/linux/Linux%E7%BD%91%E5%8D%A1%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:31:24.860Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/02/linux/Linux%E7%BD%91%E5%8D%A1%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/">Linx网卡命名规则</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux网卡命名规则"><a href="#Linux网卡命名规则" class="headerlink" title="Linux网卡命名规则"></a>Linux网卡命名规则</h1><p>一致的网络设备名以双字符前缀开始</p>
+<ul>
+<li><strong>en</strong>: 表示以太网设备（EtherNet）</li>
+<li><strong>wl</strong>: 表示无线局域网设备（Wireless Lan）</li>
+<li><strong>ww</strong>: 表示无线广域网设备（Wireless Wan）</li>
+</ul>
+<p>随后的第三个字符用于区分不同 的硬件类型</p>
+<ul>
+<li><strong>o</strong>: 表示主板板载设备（Onboard device）</li>
+<li><strong>s</strong>: 表示热插拔插槽上的设备（hot-plug Slot）</li>
+<li><strong>p</strong>: 表示PCI总线或USB接口上的设备（PCI device）</li>
+</ul>
+<p>下面是几个一致网络设备名及其说明</p>
+<ul>
+<li><strong>eno1677736</strong>: 板载的以太网设备（板载设备的索引编号为1677736）、</li>
+<li><strong>enp0s8</strong>: PCI接口的以太网设备（PCI地址总线0，插槽编号为0）</li>
+<li><strong>wlp12s0</strong>: PCI接口的无线局域网设备（PCI地址总线12，插槽编号0）</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/linux/Linux%E7%BD%91%E5%8D%A1%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" data-id="ckz5ne7yq000h99ojac2h0x1k" data-title="Linx网卡命名规则" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux/NetworkManager" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/linux/NetworkManager/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:31:24.860Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/02/linux/NetworkManager/">NetworkManager</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="NetworkManager"><a href="#NetworkManager" class="headerlink" title="NetworkManager"></a>NetworkManager</h1><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install NetworkManager</span><br></pre></td></tr></table></figure>
+
+<h2 id="Status"><a href="#Status" class="headerlink" title="Status"></a>Status</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status NetworkManager</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h2><ul>
+<li>nmcli</li>
+<li>nmtui</li>
+<li>nm-connection-editor</li>
+<li>control-centor</li>
+<li>network connection icon</li>
+</ul>
+<h2 id="nmtui"><a href="#nmtui" class="headerlink" title="nmtui"></a>nmtui</h2><h2 id="nmcli"><a href="#nmcli" class="headerlink" title="nmcli"></a>nmcli</h2><h3 id="开始、停止网卡"><a href="#开始、停止网卡" class="headerlink" title="开始、停止网卡"></a>开始、停止网卡</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nmcli con up id bond0</span><br><span class="line">nmcli con up id port0</span><br><span class="line">nmcli dev disconnect bond0</span><br><span class="line">nmcli dev disconnect ens3</span><br></pre></td></tr></table></figure>
+
+<h3 id="帮助"><a href="#帮助" class="headerlink" title="帮助"></a>帮助</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli <span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="交互式设置"><a href="#交互式设置" class="headerlink" title="交互式设置"></a>交互式设置</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli con edit ens33</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加或修改"><a href="#添加或修改" class="headerlink" title="添加或修改"></a>添加或修改</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli c add <span class="built_in">type</span> ethernet ifname enp1s0 con-name <span class="string">&quot;My Connection&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli c modify <span class="string">&quot;My favorite connection&quot;</span> ethernet.mtu 1600</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nmcli con mod ens33 ipv4.dns <span class="string">&quot;114.114.114.114 8.8.8.8&quot;</span></span><br><span class="line">nmcli con mod ens33 ipv4.gateway <span class="string">&quot;192.168.86.2&quot;</span></span><br><span class="line">nmcli con up ens33 <span class="comment"># 使配置生效</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="wifi"><a href="#wifi" class="headerlink" title="wifi"></a>wifi</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">nmcli dev wifi list</span><br><span class="line"></span><br><span class="line">nmcli con add con-name MyCafe ifname wlp61s0 <span class="built_in">type</span> wifi ssid MyCafe \</span><br><span class="line">ip4 192.168.100.101/24 gw4 192.168.100.1</span><br><span class="line"></span><br><span class="line">mcli con modify MyCafe wifi-sec.key-mgmt wpa-psk</span><br><span class="line">nmcli con modify MyCafe wifi-sec.psk caffeine</span><br><span class="line"></span><br><span class="line">nmcli radio wifi [on | off ]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="设置路由"><a href="#设置路由" class="headerlink" title="设置路由"></a>设置路由</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli connection modify enp1s0 +ipv4.routes <span class="string">&quot;192.168.122.0/24 10.10.10.1&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="GUI"><a href="#GUI" class="headerlink" title="GUI"></a>GUI</h2><h3 id="nm-connection-editor"><a href="#nm-connection-editor" class="headerlink" title="nm-connection-editor"></a>nm-connection-editor</h3><p>在命令行执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nm-connection-editor</span><br></pre></td></tr></table></figure>
+
+<p>会弹出修改界面</p>
+<h2 id="ip-command"><a href="#ip-command" class="headerlink" title="ip command"></a>ip command</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ip link <span class="built_in">set</span> ifname down</span><br><span class="line">ip address add 10.0.0.3/24 dev enp1s0</span><br><span class="line">ip addr show dev enp1s0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一块网卡配置多个ip</span></span><br><span class="line">ip address add 192.168.2.223/24 dev enp1s0</span><br><span class="line">ip address add 192.168.4.223/24 dev enp1s0</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="vlan-over-bond"><a href="#vlan-over-bond" class="headerlink" title="vlan over bond"></a>vlan over bond</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">nmcli connection add <span class="built_in">type</span> bond con-name Bond0 ifname bond0 bond.options <span class="string">&quot;mode=active-backup,miimon=100&quot;</span> ipv4.method disabled ipv6.method ignore</span><br><span class="line"></span><br><span class="line">nmcli connection add <span class="built_in">type</span> ethernet con-name Slave1 ifname em1 master bond0 slave-type bond</span><br><span class="line">nmcli connection add <span class="built_in">type</span> ethernet con-name Slave2 ifname em2 master bond0 slave-type bond</span><br><span class="line"></span><br><span class="line">nmcli connection add <span class="built_in">type</span> bridge con-name Bridge0 ifname br0 ip4 192.0.2.1/24</span><br><span class="line"></span><br><span class="line">nmcli connection add <span class="built_in">type</span> vlan con-name Vlan2 ifname bond0.2 dev bond0 id 2 master br0 slave-type bridge</span><br><span class="line"> </span><br><span class="line">nmcli connection show</span><br></pre></td></tr></table></figure>
+
+
+
+<p>基线脚本片段</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [[ <span class="variable">$VLANID</span> != <span class="string">&quot;&quot;</span> ]];<span class="keyword">then</span></span><br><span class="line">    <span class="keyword">if</span> [[ <span class="string">&quot;<span class="variable">$BONDING_OPTS</span>&quot;</span> == <span class="string">&quot;&quot;</span> ]];<span class="keyword">then</span></span><br><span class="line">        cmd=<span class="string">&quot;nmcli connection add type bond con-name <span class="variable">$&#123;BONDING_NAME&#125;</span> ifname <span class="variable">$&#123;BONDING_NAME&#125;</span> bond.options \&quot;mode=<span class="variable">$&#123;BONDING_MODE&#125;</span>,miimon=100\&quot; ipv4.method disabled ipv6.method ignore&quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        cmd=<span class="string">&quot;nmcli connection add type bond con-name <span class="variable">$&#123;BONDING_NAME&#125;</span> ifname <span class="variable">$&#123;BONDING_NAME&#125;</span> bond.options \&quot;<span class="variable">$&#123;BONDING_OPTS&#125;</span>\&quot; ipv4.method disabled ipv6.method ignore&quot;</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$cmd</span> | bash &gt;&gt; <span class="variable">$LOGFILE</span> 2&gt;&amp;1</span><br><span class="line">    nmcli connection add <span class="built_in">type</span> ethernet con-name Slave1 ifname <span class="variable">$&#123;NIC1&#125;</span> master <span class="variable">$&#123;BONDING_NAME&#125;</span> slave-type bond</span><br><span class="line">    nmcli connection add <span class="built_in">type</span> ethernet con-name Slave2 ifname <span class="variable">$&#123;NIC2&#125;</span> master <span class="variable">$&#123;BONDING_NAME&#125;</span> slave-type bond</span><br><span class="line">    nmcli connection add <span class="built_in">type</span> bridge con-name Bridge0 ifname br0 ipv4.addresses <span class="variable">$&#123;IP&#125;</span>/<span class="variable">$&#123;PREFIX&#125;</span> ipv4.gateway <span class="variable">$&#123;GATEWAY&#125;</span> ipv4.method manual</span><br><span class="line">    cmd=<span class="string">&quot;nmcli connection add type vlan con-name Vlan<span class="variable">$&#123;VLANID&#125;</span> ifname bond0<span class="variable">$&#123;VLANID&#125;</span> dev bond0 id <span class="variable">$&#123;VLANID&#125;</span> master br0 slave-type bridge&quot;</span></span><br><span class="line"><span class="keyword">else</span> </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="配置bond"><a href="#配置bond" class="headerlink" title="配置bond"></a>配置bond</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nmcli connection add <span class="built_in">type</span> bond ifname <span class="variable">$&#123;BONDING_NAME&#125;</span> con-name <span class="variable">$&#123;BONDING_NAME&#125;</span> bond.options mode=<span class="variable">$&#123;BONDING_MODE&#125;</span> miimon=100</span><br><span class="line">nmcli connection add <span class="built_in">type</span> ethernet ifname <span class="variable">$&#123;NIC1&#125;</span>  master <span class="variable">$&#123;BONDING_NAME&#125;</span></span><br><span class="line">nmcli connection add <span class="built_in">type</span> ethernet ifname <span class="variable">$&#123;NIC2&#125;</span>  master <span class="variable">$&#123;BONDING_NAME&#125;</span></span><br><span class="line">nmcli connection mod <span class="variable">$&#123;BONDING_NAME&#125;</span> ipv4.addresses <span class="variable">$&#123;IP&#125;</span>/<span class="variable">$&#123;PREFIX&#125;</span> ipv4.gateway <span class="variable">$&#123;GATEWAY&#125;</span> ipv4.method manual</span><br><span class="line">nmcli connection modify <span class="variable">$&#123;BONDING_NAME&#125;</span> ipv4.dns \&quot;<span class="variable">$&#123;DNS&#125;</span>\&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="配置bond和vlan"><a href="#配置bond和vlan" class="headerlink" title="配置bond和vlan"></a>配置bond和vlan</h2><p>准备</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">modprobe --first-time 8021q</span><br><span class="line">modinfo 8021q</span><br></pre></td></tr></table></figure>
+
+<p>配置bond</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nmcli con add <span class="built_in">type</span> bond ifname bond0 con-name bond0 mode 802.3ad miimon 100 downdelay 0 updelay 0 connection.autoconnect yes ipv4.method disabled ipv6.method ignore</span><br><span class="line"></span><br><span class="line">nmcli con add <span class="built_in">type</span> bond-slave ifname enP48p1s0f0 con-name enP48p1s0f0 master bond0</span><br><span class="line">nmcli con add <span class="built_in">type</span> bond-slave ifname enp1s0f0 con-name enp1s0f0 master bond0</span><br><span class="line"></span><br><span class="line">nmcli con up bond0</span><br></pre></td></tr></table></figure>
+
+<p>配置vlan taggin</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nmcli con add <span class="built_in">type</span> vlan ifname bond0.123 con-name bond0.123 id 123 dev bond0 connection.autoconnect yes ip4 192.168.123.123/24 gw4 192.168.123.1 ipv4.dns 192.168.123.4,192.168.123.5 ipv4.dns-search example.com</span><br><span class="line"></span><br><span class="line">nmcli con up bond0.123</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="配置bond，vlan和bridge"><a href="#配置bond，vlan和bridge" class="headerlink" title="配置bond，vlan和bridge"></a>配置bond，vlan和bridge</h2><p>配置bond</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nmcli connection add <span class="built_in">type</span> bond con-name Bond0 ifname bond0 bond.options <span class="string">&quot;mode=active-backup,miimon=100&quot;</span> ipv4.method disabled ipv6.method ignore</span><br><span class="line"></span><br><span class="line">nmcli connection add <span class="built_in">type</span> ethernet con-name Slave1 ifname em1 master bond0 slave-type bond</span><br><span class="line">nmcli connection add <span class="built_in">type</span> ethernet con-name Slave2 ifname em2 master bond0 slave-type bond</span><br></pre></td></tr></table></figure>
+
+<p>配置brigde</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli connection add <span class="built_in">type</span> bridge con-name Bridge0 ifname br0 ip4 192.0.2.1/24</span><br></pre></td></tr></table></figure>
+
+<p>配置vlan tagging</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli connection add <span class="built_in">type</span> vlan con-name Vlan2 ifname bond0.2 dev bond0 id 2 master br0 slave-type bridge</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/linux/NetworkManager/" data-id="ckz5ne7yr000i99ojgtme45hf" data-title="NetworkManager" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux/Redhat7 HA" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/linux/Redhat7%20HA/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:31:24.860Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/02/linux/Redhat7%20HA/">Redhat7 HA</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="配置Redhat7高可用、浮动IP"><a href="#配置Redhat7高可用、浮动IP" class="headerlink" title="配置Redhat7高可用、浮动IP"></a>配置Redhat7高可用、浮动IP</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>两台redhat7服务器: 192.168.10.9, 192.168.10.10</p>
+<h2 id="配置-x2F-etc-x2F-hosts"><a href="#配置-x2F-etc-x2F-hosts" class="headerlink" title="配置&#x2F;etc&#x2F;hosts"></a>配置&#x2F;etc&#x2F;hosts</h2><p>各节点服务器分别执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">192.168.10.9 node1</span><br><span class="line">192.168.10.10 node2</span><br></pre></td></tr></table></figure>
+
+<p>检查</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ping -c 3 node1</span><br><span class="line">ping -c 3 node2</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置高可用yum源"><a href="#配置高可用yum源" class="headerlink" title="配置高可用yum源"></a>配置高可用yum源</h2><p>各节点服务器分别执行</p>
+<p>高可用软件在addons文件夹里面</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[HighAvailability]</span><br><span class="line">name=HighAvailability</span><br><span class="line">baseurl=file:///mnt/addons/HighAvailability</span><br><span class="line">gpgcheck=0</span><br><span class="line"><span class="built_in">enable</span>=1</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>各节点服务器分别执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install corosync pacemaker pcs</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>配置开机自启动，各节点服务器分别执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> pcsd</span><br><span class="line">systemctl <span class="built_in">enable</span> corosync</span><br><span class="line">systemctl <span class="built_in">enable</span> pacemaker</span><br></pre></td></tr></table></figure>
+
+<p>启动，各节点服务器分别执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start pcsd</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置高可用用户"><a href="#配置高可用用户" class="headerlink" title="配置高可用用户"></a>配置高可用用户</h2><p>各节点服务器分别执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd hacluster</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建集群"><a href="#创建集群" class="headerlink" title="创建集群"></a>创建集群</h2><p>在node1上 执行即可</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 授权</span></span><br><span class="line">pcs cluster auth node1 node2</span><br><span class="line"><span class="comment"># 配置</span></span><br><span class="line">pcs cluster setup --name my_cluster node1 node2</span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">pcs cluster start --all</span><br><span class="line">pcs cluster <span class="built_in">enable</span> --all</span><br></pre></td></tr></table></figure>
+
+<p>检查状态</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs status cluster</span><br></pre></td></tr></table></figure>
+
+<h2 id="关闭STONITH和Quorum-Policy"><a href="#关闭STONITH和Quorum-Policy" class="headerlink" title="关闭STONITH和Quorum Policy"></a>关闭STONITH和Quorum Policy</h2><p>在node1上 执行即可</p>
+<blockquote>
+<p>STONITH: Shoot The Other Node In The Head</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pcs property <span class="built_in">set</span> stonith-enabled=<span class="literal">false</span></span><br><span class="line">pcs property <span class="built_in">set</span> no-quorum-policy=ignore</span><br><span class="line">pcs property list</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加Resources"><a href="#添加Resources" class="headerlink" title="添加Resources"></a>添加Resources</h2><h3 id="查看Resouces"><a href="#查看Resouces" class="headerlink" title="查看Resouces"></a>查看Resouces</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs status resources</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加浮动IP"><a href="#添加浮动IP" class="headerlink" title="添加浮动IP"></a>添加浮动IP</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs resource create virtual_ip ocf:heartbeat:IPaddr2 ip=192.168.10.11 cidr_netmask=32 op monitor interval=30s</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加nginx"><a href="#添加nginx" class="headerlink" title="添加nginx"></a>添加nginx</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs resource create webserver ocf:heartbeat:nginx configfile=/etc/nginx/nginx.conf op monitor timeout=<span class="string">&quot;5s&quot;</span> interval=<span class="string">&quot;5s&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="配置Cluster-Constraint"><a href="#配置Cluster-Constraint" class="headerlink" title="配置Cluster Constraint"></a>配置Cluster Constraint</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pcs constraint colocation add webserver virtual_ip INFINITY</span><br><span class="line">pcs constraint order virtual_ip <span class="keyword">then</span> webserver</span><br></pre></td></tr></table></figure>
+
+<h2 id="重启集群"><a href="#重启集群" class="headerlink" title="重启集群"></a>重启集群</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pcs cluster stop --all</span><br><span class="line">pcs cluster start --all</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs cluster stop node1</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/linux/Redhat7%20HA/" data-id="ckz5ne7ys000j99ojbgsvb225" data-title="Redhat7 HA" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux/Systemd" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/linux/Systemd/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:31:24.860Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/02/linux/Systemd/">systemd</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Systemd"><a href="#Systemd" class="headerlink" title="Systemd"></a>Systemd</h1><p>[TOC]</p>
+<p>Systemd是Linux系统工具，用来启动守护进程（daemon）。已成为大多数发行版的标准配置。</p>
+<p>Systemd取代了initd，成为系统的第一个进程（PID等于1），其他的进程都是他的子进程。</p>
+<h2 id="Systemd架构图"><a href="#Systemd架构图" class="headerlink" title="Systemd架构图"></a>Systemd架构图</h2><p><img src="/Images/bg2016030703.png" alt="img"></p>
+<p>Systemd的优点是功能强大，使用方便，缺点是体系庞大，非常复杂。</p>
+<h2 id="系统管理"><a href="#系统管理" class="headerlink" title="系统管理"></a>系统管理</h2><p>Systemd并不是一个命令，而是一组命令，涉及到系统管理的方方面面。</p>
+<h3 id="systemctl"><a href="#systemctl" class="headerlink" title="systemctl"></a>systemctl</h3><p>Systemctl是Systemd的主命令，用于管理系统。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重启系统</span></span><br><span class="line">$ sudo systemctl reboot</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭系统，切断电源</span></span><br><span class="line">$ sudo systemctl poweroff</span><br><span class="line"></span><br><span class="line"><span class="comment"># CPU停止工作</span></span><br><span class="line">$ sudo systemctl halt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 暂停系统</span></span><br><span class="line">$ sudo systemctl <span class="built_in">suspend</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 让系统进入冬眠状态</span></span><br><span class="line">$ sudo systemctl hibernate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 让系统进入交互式休眠状态</span></span><br><span class="line">$ sudo systemctl hybrid-sleep</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动进入救援状态（单用户状态）</span></span><br><span class="line">$ sudo systemctl rescue</span><br></pre></td></tr></table></figure>
+
+<h3 id="systemd-analyze"><a href="#systemd-analyze" class="headerlink" title="systemd-analyze"></a>systemd-analyze</h3><p><code>systemd-analyze</code>命令用于查看启动耗时。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看启动耗时</span></span><br><span class="line">$ systemd-analyze                                                                                       </span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看每个服务的启动耗时</span></span><br><span class="line">$ systemd-analyze blame</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示瀑布状的启动过程流</span></span><br><span class="line">$ systemd-analyze critical-chain</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定服务的启动流</span></span><br><span class="line">$ systemd-analyze critical-chain atd.service</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="hostnamectl"><a href="#hostnamectl" class="headerlink" title="hostnamectl"></a>hostnamectl</h3><p><code>hostnamectl</code>命令用于查看当前主机的信息。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示当前主机的信息</span></span><br><span class="line">$ hostnamectl</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置主机名。</span></span><br><span class="line">$ sudo hostnamectl set-hostname rhel7</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="journalctl"><a href="#journalctl" class="headerlink" title="journalctl"></a>journalctl</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">journalctl -b</span><br><span class="line">journalctl -b -1</span><br><span class="line">journalctl --list-boots</span><br><span class="line"></span><br><span class="line">journalctl --since <span class="string">&quot;1 hour ago&quot;</span></span><br><span class="line">journalctl --since <span class="string">&quot;2015-06-26 23:15:00&quot;</span> --until <span class="string">&quot;2015-06-26 23:20:00&quot;</span></span><br><span class="line">journalctl -u nginx.service</span><br><span class="line">journalctl -u nginx.service -u mysql.service</span><br><span class="line">journalctl -f</span><br><span class="line">journalctl -u mysql.service -f</span><br><span class="line">journalctl -n 50 --since <span class="string">&quot;1 hour ago&quot;</span></span><br><span class="line">journalctl -u sshd.service -r -n 1</span><br><span class="line">journalctl -u apache2.service -r -o json-pretty</span><br><span class="line">journalctl -b -1  -p <span class="string">&quot;emerg&quot;</span>..<span class="string">&quot;crit&quot;</span></span><br><span class="line">journalctl _UID=108</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="localectl"><a href="#localectl" class="headerlink" title="localectl"></a>localectl</h3><p><code>localectl</code>命令用于查看本地化设置。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看本地化设置</span></span><br><span class="line">$ localectl</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置本地化参数。</span></span><br><span class="line">$ sudo localectl set-locale LANG=en_GB.utf8</span><br><span class="line">$ sudo localectl set-keymap en_GB</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="timedatectl"><a href="#timedatectl" class="headerlink" title="timedatectl"></a>timedatectl</h3><p><code>timedatectl</code>命令用于查看当前时区设置。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看当前时区设置</span></span><br><span class="line">$ timedatectl</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有可用的时区</span></span><br><span class="line">$ timedatectl list-timezones                                                                                   </span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置当前时区</span></span><br><span class="line">$ sudo timedatectl set-timezone America/New_York</span><br><span class="line">$ sudo timedatectl set-time YYYY-MM-DD</span><br><span class="line">$ sudo timedatectl set-time HH:MM:SS</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="loginctl"><a href="#loginctl" class="headerlink" title="loginctl"></a>loginctl</h3><p><code>loginctl</code>命令用于查看当前登录的用户。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出当前session</span></span><br><span class="line">$ loginctl list-sessions</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出当前登录用户</span></span><br><span class="line">$ loginctl list-users</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出显示指定用户的信息</span></span><br><span class="line">$ loginctl show-user ruanyf</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="自定义systemd服务"><a href="#自定义systemd服务" class="headerlink" title="自定义systemd服务"></a>自定义systemd服务</h2><p>文件名以.service结尾，放在&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;, &#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system&#x2F; 目录下。</p>
+<p>文件内容一般包含三个部分：</p>
+<ul>
+<li>Unit: 定义service的一些基本信息， description, after</li>
+<li>Service: 定义服务的启动和停止命令，类型等</li>
+<li>Install: 服务的运行级别</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=custom service</span><br><span class="line">after=network.service</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">User=<span class="built_in">test</span></span><br><span class="line">Group=<span class="built_in">test</span></span><br><span class="line">ExecStart=/bin/app start</span><br><span class="line">Restart=always</span><br><span class="line">SuccessExitStatus=KILL</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://www.freedesktop.org/software/systemd/man/systemd.service.html">https://www.freedesktop.org/software/systemd/man/systemd.service.html</a></p>
+<h2 id="type-forking-simple"><a href="#type-forking-simple" class="headerlink" title="type forking, simple"></a>type forking, simple</h2><p>Type&#x3D;forking<br>systemd认为当该服务进程fork，且父进程退出后服务启动成功。对于常规的守护进程（daemon），除非你确定此启动方式无法满足需求，使用此类型启动即可。使用此启动类型应同时指定 PIDFile&#x3D;，以便 systemd 能够跟踪服务的主进程<br>Type&#x3D;simple<br>systemd认为该服务将立即启动。服务进程不会 fork 。如果该服务要启动其他服务，不要使用此类型启动，除非该服务是socket 激活型。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/linux/Systemd/" data-id="ckz5ne7ys000k99oj87prbu17" data-title="systemd" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux/centos7" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/linux/centos7/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:31:24.860Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/02/linux/centos7/">centos7</a>
+    </h1>
+  
+
+      </header>
     
     <div class="e-content article-entry" itemprop="articleBody">
       
@@ -307,570 +1066,11 @@
 
 <p>最后</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum clean all </span><br><span class="line">yum makecache</span><br><span class="line">yum update</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/02/linux/centos7/" data-id="ckz5mgqk9000kbeoiaw5950qt" data-title="" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-linux/clash" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/02/02/linux/clash/" class="article-date">
-  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="clash"><a href="#clash" class="headerlink" title="clash"></a>clash</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><a target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash">https://github.com/Dreamacro/clash</a></p>
-<p>下载对应的版本</p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -O config.yml &lt;clash托管连接&gt;</span><br><span class="line">./clash</span><br></pre></td></tr></table></figure>
-
-<h2 id="web配置管理工具"><a href="#web配置管理工具" class="headerlink" title="web配置管理工具"></a>web配置管理工具</h2><p>直接访问如下链接</p>
-<p><a target="_blank" rel="noopener" href="http://clash.razord.top/">http://clash.razord.top</a></p>
-<h2 id="clash-for-windows"><a href="#clash-for-windows" class="headerlink" title="clash for windows"></a>clash for windows</h2><p>有图形界面的clash，纸质windows， mac, linux</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Fndroid/clash_for_windows_pkg">https://github.com/Fndroid/clash_for_windows_pkg</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/02/linux/clash/" data-id="ckz5mgqk9000lbeoicbt991ui" data-title="" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-linux/dhcp" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/02/02/linux/dhcp/" class="article-date">
-  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="dhcp"><a href="#dhcp" class="headerlink" title="dhcp"></a>dhcp</h1><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install dhcp</span><br></pre></td></tr></table></figure>
-
-<h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start dhcpd</span><br></pre></td></tr></table></figure>
-
-<h2 id="Help"><a href="#Help" class="headerlink" title="Help"></a>Help</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man dhcpd</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>&#x2F;etc&#x2F;dhcp&#x2F;dhcpd.conf</p>
-<ul>
-<li>Subnet Declaration</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">subnet 192.168.1.0 netmask 255.255.255.0 &#123;</span><br><span class="line">    option routers 192.168.1.254;</span><br><span class="line">    option subnet-mask 255.255.255.0;</span><br><span class="line">    option domain-search <span class="string">&quot;example.com&quot;</span>;</span><br><span class="line">    option domain-name-servers 192.168.1.1;</span><br><span class="line">    option time-offset -18000; <span class="comment"># Eastern Standard Time</span></span><br><span class="line">    range 192.168.1.10 192.168.1.100;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Range Parameter</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">default-lease-time 600;</span><br><span class="line">max-lease-time 7200;</span><br><span class="line">option subnet-mask 255.255.255.0;</span><br><span class="line">option broadcast-address 192.168.1.255;</span><br><span class="line">option routers 192.168.1.254;</span><br><span class="line">option domain-name-servers 192.168.1.1, 192.168.1.2;</span><br><span class="line">option domain-search <span class="string">&quot;example.com&quot;</span>;</span><br><span class="line">subnet 192.168.1.0 netmask 255.255.255.0 &#123;</span><br><span class="line">	range 192.168.1.10 192.168.1.100;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Static IP Address Using DHCP</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">host apex &#123;</span><br><span class="line">    option host-name <span class="string">&quot;apex.example.com&quot;</span>;</span><br><span class="line">    hardware ethernet 00:A0:78:8E:9E:AA;</span><br><span class="line">    fixed-address 192.168.1.4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Static IP Address Using DHCP on Multiple Interfaces</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host apex.0 &#123;</span><br><span class="line">    option host-name “apex.example.com”;</span><br><span class="line">    hardware ethernet 00:A0:78:8E:9E:AA;</span><br><span class="line">    option dhcp-client-identifier=ff:00:00:00:00:00:02:00:00:02:c9:00:00:02:c9:03:00:31:7b:11;</span><br><span class="line">    fixed-address 172.31.0.50,172.31.2.50,172.31.1.50,172.31.3.50;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install bind-chroot</span><br><span class="line">systemctl status named</span><br><span class="line">systemctl start named</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h2><ul>
-<li>&#x2F;etc&#x2F;named.conf</li>
-</ul>
-<p>将监听地址和运行查询的地址都改为 any，分别表示服务器上的所有IP地址均可提供DNS域名解析服务，以及允许所有人对本服务器发送DNS查询请求。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listen-on port 53 &#123; any; &#125;;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>&#x2F;etc&#x2F;named.rfc1912.zones</strong></li>
-</ul>
-<p>用来保存域名和IP地址对应关系的所在位置</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">zone <span class="string">&quot;example.com&quot;</span> IN &#123;</span><br><span class="line">        <span class="built_in">type</span> master;</span><br><span class="line">        file <span class="string">&quot;example.com.zone&quot;</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>&#x2F;var&#x2F;named&#x2F;example.com.zone</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$TTL</span> 1D</span><br><span class="line">@       IN SOA  @ example.com. (</span><br><span class="line">                                        0       ; serial</span><br><span class="line">                                        1D      ; refresh</span><br><span class="line">                                        1H      ; retry</span><br><span class="line">                                        1W      ; expire</span><br><span class="line">                                        3H )    ; minimum</span><br><span class="line">        NS      @</span><br><span class="line">        A       192.168.86.128</span><br><span class="line">        AAAA    ::1</span><br></pre></td></tr></table></figure>
-
-<h2 id="检查配置，重启服务"><a href="#检查配置，重启服务" class="headerlink" title="检查配置，重启服务"></a>检查配置，重启服务</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">named-checkconf</span><br><span class="line">named-checkzone eample.com /var/named/example.com.zone </span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/resolv.conf</span><br><span class="line"><span class="comment">#进入该配置文件，指定使用的域名解析服务器。</span></span><br><span class="line"><span class="comment"># Generated by NetworkManager</span></span><br><span class="line">nameserver 192.168.245.128</span><br><span class="line">search 192.168.245.128</span><br></pre></td></tr></table></figure>
-
-<p>重启服务</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart named</span><br></pre></td></tr></table></figure>
-
-<h1 id="squid"><a href="#squid" class="headerlink" title="squid"></a>squid</h1><p>squid是一个代理服务器，可以用作内容缓存，提高访问速度。</p>
-<h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install squid</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="配置缓存代理服务器"><a href="#配置缓存代理服务器" class="headerlink" title="配置缓存代理服务器"></a>配置缓存代理服务器</h2><p> &#x2F;etc&#x2F;squid&#x2F;squid.conf</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">acl localnet src 192.0.2.0/24</span><br><span class="line">acl localnet 2001:db8::/32</span><br><span class="line">acl SSL_ports port 443</span><br><span class="line">acl Safe_ports port 21</span><br><span class="line">acl Safe_ports port 80</span><br><span class="line">acl Safe_ports port 443</span><br><span class="line">cache_dir ufs /var/spool/squid 10000 16 256</span><br></pre></td></tr></table></figure>
-
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start squid</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/02/linux/dhcp/" data-id="ckz5mgqk9000mbeoi4hpfgkju" data-title="" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-linux/redhat7.4 开发环境配置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/02/02/linux/redhat7.4%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="article-date">
-  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="redhat7-4-开发环境配置"><a href="#redhat7-4-开发环境配置" class="headerlink" title="redhat7.4 开发环境配置"></a>redhat7.4 开发环境配置</h1><p>[TOC]</p>
-<h2 id="1-启动U盘制作"><a href="#1-启动U盘制作" class="headerlink" title="1. 启动U盘制作"></a>1. 启动U盘制作</h2><p>制作工具：rufus</p>
-<h2 id="2-安装系统"><a href="#2-安装系统" class="headerlink" title="2. 安装系统"></a>2. 安装系统</h2><p>进入BIOS设置U盘启动。</p>
-<p>分区配置</p>
-<table>
-<thead>
-<tr>
-<th>挂载点</th>
-<th>容量</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&#x2F;boot</td>
-<td>1024M</td>
-</tr>
-<tr>
-<td>swap</td>
-<td>2048M</td>
-</tr>
-<tr>
-<td>&#x2F;</td>
-<td>所有剩余</td>
-</tr>
-</tbody></table>
-<p>账户配置</p>
-<table>
-<thead>
-<tr>
-<th>账户</th>
-<th>密码</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>root</td>
-<td>Root1234</td>
-</tr>
-<tr>
-<td>hemign</td>
-<td>Heming1234</td>
-</tr>
-</tbody></table>
-<p>软件选择：Server with GUI</p>
-<h2 id="3-网络配置"><a href="#3-网络配置" class="headerlink" title="3. 网络配置"></a>3. 网络配置</h2><p>默认：dhcp</p>
-<h2 id="4-CentOS-yum安装"><a href="#4-CentOS-yum安装" class="headerlink" title="4. CentOS yum安装"></a>4. CentOS yum安装</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | greap yum</span><br><span class="line"><span class="comment"># 删除原本的yum文件</span></span><br><span class="line">sudo rpm -qa | grep yum | xargs rpm -e --nodeps</span><br></pre></td></tr></table></figure>
-<p><del>去阿里镜像站下载五个文件（对应版本的目录下）</del><br><del><a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/">https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/</a></del></p>
-<p><del>yum-metadata-parser</del><br><del>yum</del><br><del>yum-plugin-fastestmirror</del><br><del>yum-utils</del><br><del>python-urlgrabber</del></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-metadata-parser-1.1.4-10.el7.x86_64.rpm</span><br><span class="line">wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-3.4.3-158.el7.centos.noarch.rpm</span><br><span class="line">wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-plugin-fastestmirror-1.1.31-45.el7.noarch.rpm</span><br><span class="line">wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-utils-1.1.31-45.el7.noarch.rpm</span><br><span class="line">wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/python-urlgrabber-3.10-8.el7.noarch.rpm  </span><br></pre></td></tr></table></figure>
-
-<p><del>安装，加上 –force强制安装（解决依赖问题）</del></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -ivh xxx1.rpm xxx2.rpm xxx3.rpm xxx4.rpm xxx5.rpm --force --nodeps</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>说明：不需要卸载原有的yum重新安装，添加阿里或者163的cengtos的yum仓库即可。</p>
-</blockquote>
-<p>阿里镜像yum源</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo</span><br></pre></td></tr></table></figure>
-
-<p>修改版本号</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/yum.repos.d/CentOS-Base.repo </span><br><span class="line"></span><br><span class="line">:%s/<span class="variable">$releaserver</span>/7/g</span><br></pre></td></tr></table></figure>
-
-<p>最后</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum clean all </span><br><span class="line">sudo yum makecache</span><br><span class="line">sudo yum update</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-idea安装"><a href="#5-idea安装" class="headerlink" title="5. idea安装"></a>5. idea安装</h2><p>下载二进制软件包: ideaC.tar.gz</p>
-<p>解压安装</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo cp ideaC.tar.gz /opt/</span><br><span class="line"><span class="built_in">cd</span> /opt</span><br><span class="line">sudo tar -zxvf ideaC.tar.gz</span><br><span class="line"><span class="built_in">cd</span> ideaC</span><br><span class="line">sudo sh idea.sh <span class="comment"># 执行这个脚本开始初始配置</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="6-VS-code-安装"><a href="#6-VS-code-安装" class="headerlink" title="6. VS code 安装"></a>6. VS code 安装</h2><p>官网下载vs code的rpm包: code*.rpm</p>
-<p>rpm安装</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh code*.rpm</span><br></pre></td></tr></table></figure>
-
-<p>如果报错：Failed Deppendencies: libXss.so…</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install libXss* -y</span><br><span class="line">rpm -ivh code*.rpm </span><br><span class="line">code <span class="comment">## 启动vscode</span></span><br></pre></td></tr></table></figure>
-
-<p>如果有报错信息：&#x2F;lib&#x2F;libdbus.so…… no version available….</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install dbus -y</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="7-Typora安装"><a href="#7-Typora安装" class="headerlink" title="7. Typora安装"></a>7. Typora安装</h2><p>官网下载二进制文件：Typora-linux-x64.tar.gz （<a target="_blank" rel="noopener" href="https://www.typora.io/#linux%EF%BC%89">https://www.typora.io/#linux）</a></p>
-<p>解压安装</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cp Typora-linux-x64.tar.gz /opt/</span><br><span class="line"><span class="built_in">cd</span> /opt</span><br><span class="line">tar -zxvf Typora-linux-x64.tar.gz</span><br><span class="line"><span class="built_in">cd</span> Typora-linux-x64</span><br><span class="line">./Typora <span class="comment"># 执行成功会出现tyora编辑界面</span></span><br></pre></td></tr></table></figure>
-
-<p>报错：</p>
-<ol>
-<li>&#x2F;lib&#x2F;libdbus.so…… no version available</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install dbus -y <span class="comment"># 安装所缺调用库即可</span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>..(省略)make sure the &#x2F;opt&#x2F;Typora-linux-x64&#x2F;chrom-sandbox’s ower is root, and has 4755 mode.</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R root /opt/Typora-linux-x64</span><br><span class="line">sudo chgrp -R root /opt/Typora-linux-x64</span><br><span class="line">sudo chmod 4755 /opt/Typora-linux-x64/chrome-sandbox</span><br></pre></td></tr></table></figure>
-
-<p>创建快捷方式</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su root</span><br><span class="line">vim /usr/share/applications/typora.desktop</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Name=Typora</span><br><span class="line">Exec=/opt/Typora-linux-x64/Typora %U</span><br><span class="line">Icon=/opt/Typora-linux-x64/resources/app/asserts/icon/icon_128x128.png</span><br><span class="line">Type=Application</span><br><span class="line">Terminal=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<p>保存文件即可</p>
-<h2 id="8-安装svn"><a href="#8-安装svn" class="headerlink" title="8. 安装svn"></a>8. 安装svn</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install svn</span><br><span class="line">svn checkout repository-url <span class="comment"># 拉去源码</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="9-安装-oracle-jdk"><a href="#9-安装-oracle-jdk" class="headerlink" title="9. 安装 oracle jdk"></a>9. 安装 oracle jdk</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep jdk | xargs rpm -e --nodeps</span><br><span class="line">rpm -ivh jdk*.rpm</span><br><span class="line">java -version</span><br></pre></td></tr></table></figure>
-
-<h2 id="10-安装nodejs"><a href="#10-安装nodejs" class="headerlink" title="10. 安装nodejs"></a>10. 安装nodejs</h2><p>官网下载二进制包：node-v14.0.0-linux-x64.tar</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp node-v14.0.0-linux-x64.tar /opt/</span><br><span class="line">xz -d node-v14.0.0-linux-x64.tar.xz</span><br><span class="line">tar -xf node-v14.0.0-linux-x64.tar</span><br></pre></td></tr></table></figure>
-
-<p>部署bin文件</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ln -s /opt/node-v14.0.0-linux-x64/bin/node /usr/bin/node</span><br><span class="line">ln -s /opt/node-v14.0.0-linux-x64/bin/npm /usr/bin/npm</span><br><span class="line">ln -s /opt/node-v14.0.0-linux-x64/bin/npm /usr/bin/npx</span><br></pre></td></tr></table></figure>
-
-<p>测试</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line">npx	</span><br></pre></td></tr></table></figure>
-
-<p>设置淘宝的npm仓库</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看源</span></span><br><span class="line">npm get registry</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置淘宝源</span></span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="11-安装gcc-gcc-c"><a href="#11-安装gcc-gcc-c" class="headerlink" title="11.安装gcc, gcc-c++"></a>11.安装gcc, gcc-c++</h2><p>npm install 时报错 make: g++: Command not found</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install make gcc gcc-c++ -y</span><br></pre></td></tr></table></figure>
-
-<h2 id="12-安装ipmitool"><a href="#12-安装ipmitool" class="headerlink" title="12. 安装ipmitool"></a>12. 安装ipmitool</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install ipmitool</span><br></pre></td></tr></table></figure>
-
-<h2 id="13-安装Dell的racadm"><a href="#13-安装Dell的racadm" class="headerlink" title="13. 安装Dell的racadm"></a>13. 安装Dell的racadm</h2><p>解压</p>
-<p>安装</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cd 到解压目录的racadm路径下</span></span><br><span class="line">sudo sh install_racadm.sh</span><br></pre></td></tr></table></figure>
-
-<p>使用时报错：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[heming@localhost ~]$ racadm -r 192.168.1.196 -u root -p calvin --nocertwarn get -t xml -f test.xml</span><br><span class="line">ERROR: RAC1170: Unable to find the SSL library <span class="keyword">in</span> the default path.</span><br><span class="line">       If a SSL library is not installed, install one and retry the </span><br><span class="line">       operation. If a SSL library is installed, create a soft-link of the </span><br><span class="line">       installed SSL library to <span class="string">&quot;libssl.so&quot;</span> using the linux <span class="string">&quot;ln&quot;</span> <span class="built_in">command</span> </span><br><span class="line">       and retry the operation.</span><br></pre></td></tr></table></figure>
-
-<p>原因：缺少ssl库文件</p>
-<p>解决：</p>
-<p>安装openssl</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install openssl</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以找到ssl库的位置在 /usr/lib64/libssl.so.1.0.2k</span></span><br><span class="line">sudo find / -name libssl.so*</span><br><span class="line">sudo ln -s /usr/lib64/libssl.so.1.0.2k /opt/dell/srvadmin/lib64/libssl.so</span><br></pre></td></tr></table></figure>
-
-<h2 id="14-安装Huawei的urest-umate"><a href="#14-安装Huawei的urest-umate" class="headerlink" title="14. 安装Huawei的urest,umate"></a>14. 安装Huawei的urest,umate</h2><p>解压二进制软件包到项目下制定路径即可。</p>
-<p>注意：请将压缩包在linux环境下用tar解压，涉及到链接文件，和文件权限等问题。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/02/linux/redhat7.4%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" data-id="ckz5mgqka000nbeoi3hzzd52l" data-title="" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-linux/shc" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/02/02/linux/shc/" class="article-date">
-  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="shell脚本加密"><a href="#shell脚本加密" class="headerlink" title="shell脚本加密"></a>shell脚本加密</h2><p><a target="_blank" rel="noopener" href="http://www.datsi.fi.upm.es/~frosal/">http://www.datsi.fi.upm.es/~frosal/</a></p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.datsi.fi.upm.es/~frosal/sources/shc-3.8.7.tgz</span><br><span class="line">tar xvfz shc-3.8.7.tgz</span><br><span class="line"><span class="built_in">cd</span> shc-3.8.7</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
-
-<h3 id="静态编译脚本"><a href="#静态编译脚本" class="headerlink" title="静态编译脚本"></a>静态编译脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS=-static shc -r -f test.sh</span><br></pre></td></tr></table></figure>
-
-<p>说明：</p>
-<ul>
-<li>CFLAGS&#x3D;-static： 静态编译，生成的可执行文件可在别的设备上执行</li>
-<li>-r: 是生成的可执行文件可在别的系统上执行</li>
-<li>-f： 指定脚本</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/02/linux/shc/" data-id="ckz5mgqka000obeoi42127pqq" data-title="" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-linux/shell" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/02/02/linux/shell/" class="article-date">
-  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h1><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="shell-变量"><a href="#shell-变量" class="headerlink" title="shell 变量"></a>shell 变量</h3><ul>
-<li><strong>变量</strong></li>
-</ul>
-<p>注意：等号两边不能有空格</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var=shawn</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$var</span></span><br></pre></td></tr></table></figure>
-
-<p>单引号：仅一般字符</p>
-<p>双引号：可以保有变量内容</p>
-<p>反引号：反引号的命令会被先执行，作为外部的输入信息</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l `locate crontab`</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一样</span></span><br><span class="line">version=$(uname -r)</span><br><span class="line">version=`uname -r`</span><br></pre></td></tr></table></figure>
-
-<p> 字符串可以用单引号，也可以用双引号，也可以不用引号。</p>
-<ul>
-<li>只读变量</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">myUrl=<span class="string">&quot;https://www.shawn.com&quot;</span></span><br><span class="line"><span class="built_in">readonly</span> myUrl</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>删除变量</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">unset</span> variable_name</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>获取字符串长度</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string=<span class="string">&quot;abcd&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;#string&#125;</span> <span class="comment">#输出 4</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>提取子字符串</li>
-</ul>
-<p>以下实例从字符串第 <strong>2</strong> 个字符开始截取 <strong>4</strong> 个字符：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string=<span class="string">&quot;runoob is a great site&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;string:1:4&#125;</span> <span class="comment"># 输出 unoo</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="变量字符串操作"><a href="#变量字符串操作" class="headerlink" title="变量字符串操作"></a>变量字符串操作</h3><ul>
-<li>**$</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/02/linux/shell/" data-id="ckz5mgqkb000pbeoi7mbibijt" data-title="" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-linux/ubuntu" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/02/02/linux/ubuntu/" class="article-date">
-  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="ubuntu-安装"><a href="#ubuntu-安装" class="headerlink" title="ubuntu 安装"></a>ubuntu 安装</h1><h3 id="windows10-ubuntu18-04双系统，重启关机卡的问题"><a href="#windows10-ubuntu18-04双系统，重启关机卡的问题" class="headerlink" title="windows10 + ubuntu18.04双系统，重启关机卡的问题"></a>windows10 + ubuntu18.04双系统，重启关机卡的问题</h3><p>高亮install ubuntu，然后按 <code>e</code>键，进入grub设置，将quiet splash – 改为 quiet splash nomodeset</p>
-<p>安装完后，也可以在引导界面高亮ubuntu然后按<code>e</code>键进入grub设置。</p>
-<h3 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h3><p>ubuntu 分区</p>
-<p>120G</p>
-<p>&#x2F;boot 200M</p>
-<p>&#x2F; 25G</p>
-<p>&#x2F;home 用户数据，下载的文件和媒体文件，多多益善</p>
-<p>swap 8G</p>
-<p>&#x2F;boot 选择逻辑分区</p>
-<h3 id="安装完后的一些操作"><a href="#安装完后的一些操作" class="headerlink" title="安装完后的一些操作"></a>安装完后的一些操作</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新apt包</span></span><br><span class="line">$ sudo apt update</span><br><span class="line">$ sudo apt upgrade</span><br><span class="line"><span class="comment"># 驱动</span></span><br><span class="line">$ ubuntu-drivers devices</span><br><span class="line">$ ubuntu-drivers autoinstall</span><br><span class="line">$ nvidia-settings</span><br></pre></td></tr></table></figure>
-
-<p>安装fcitx，安装搜狗输入法</p>
-<h2 id="Ubuntu18安装zsh"><a href="#Ubuntu18安装zsh" class="headerlink" title="Ubuntu18安装zsh"></a>Ubuntu18安装zsh</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install zsh</span><br><span class="line"></span><br><span class="line">vim /etc/pam.d/ppp</span><br><span class="line"><span class="comment"># 将required 改为sufficient</span></span><br><span class="line">auth       sufficient   pam_shells.so</span><br><span class="line"></span><br><span class="line">chsh -s /bin/zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据官网命令安装</span></span><br><span class="line">wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/02/linux/ubuntu/" data-id="ckz5mgqkb000qbeoig49lafiv" data-title="" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-linux/webterminal/cockpit-使用web管理Redhat" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/02/02/linux/webterminal/cockpit-%E4%BD%BF%E7%94%A8web%E7%AE%A1%E7%90%86Redhat/" class="article-date">
-  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="cockpit"><a href="#cockpit" class="headerlink" title="cockpit"></a>cockpit</h1><p>[toc]</p>
-<p><a target="_blank" rel="noopener" href="https://cockpit-project.org/running.html">Running Cockpit — Cockpit Project (cockpit-project.org)</a></p>
-<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install cockpit -y</span><br></pre></td></tr></table></figure>
-
-<h2 id="Firewall"><a href="#Firewall" class="headerlink" title="Firewall"></a>Firewall</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --add-service=cockpit --permanent</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start cockpit.socket</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Nginx-Proxy"><a href="#Nginx-Proxy" class="headerlink" title="Nginx Proxy"></a>Nginx Proxy</h2><p>vim &#x2F;etc&#x2F;cockpit&#x2F;cockpit.conf</p>
-<p>允许跨域，关闭ssl，设置根路径</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[WebService]</span><br><span class="line">Origins = https://vm2 https://vm2:9090 wss://vm wss://vm:9090</span><br><span class="line">ProtocolHeader = X-Forwarded-Proto</span><br><span class="line">AllowUnencrypted = <span class="literal">true</span></span><br><span class="line">UrlRoot = /cockpit0/</span><br></pre></td></tr></table></figure>
-
-
-
-<p>vim  vim &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;cockpit.socket</p>
-<p>因为关闭了ssl，所以为了安全，改成只监听本地端口</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[Socket]</span><br><span class="line">ListenStream=127.0.0.1:9090</span><br></pre></td></tr></table></figure>
-<p>修改配置后重启cockpit</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart cockpit</span><br></pre></td></tr></table></figure>
-
-
-
-<p>修改nginx配置，可通过 <a target="_blank" rel="noopener" href="https://ip/cockpi0/">https://ip/cockpi0/</a> 访问 cockpit</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">location</span><span class="regexp"> ^~/cockpit0/</span> &#123;</span><br><span class="line">    <span class="attribute">proxy_pass</span> http://localhost:9090/cockpit0/;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> X-Forwarded-Proto $scheme;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> Host $host;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> Upgrade $http_upgrade;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> Connection upgrade;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> Accept-Encoding gzip;</span><br><span class="line">    <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">    <span class="attribute">proxy_buffering</span> <span class="literal">off</span>;</span><br><span class="line">    <span class="attribute">gzip</span> <span class="literal">off</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/02/linux/webterminal/cockpit-%E4%BD%BF%E7%94%A8web%E7%AE%A1%E7%90%86Redhat/" data-id="ckz5mgqkc000rbeoi3gvufkh6" data-title="" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-linux/webterminal/shellinabox" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/02/02/linux/webterminal/shellinabox/" class="article-date">
-  <time class="dt-published" datetime="2022-02-02T14:05:22.678Z" itemprop="datePublished">2022-02-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="shellinabox"><a href="#shellinabox" class="headerlink" title="shellinabox"></a>shellinabox</h1><p>说明：通过web访问服务器命令行。</p>
-<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install shellinabox</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start shellinaboxd.service</span><br></pre></td></tr></table></figure>
-
-
-
-<p>访问 <a target="_blank" rel="noopener" href="https://ip:4200/">https://ip:4200</a> 登录使用</p>
-<p>注意，默认不能直接使用root登录。</p>
-<h2 id="Nginx-Proxy"><a href="#Nginx-Proxy" class="headerlink" title="Nginx Proxy"></a>Nginx Proxy</h2><ol>
-<li>shellinabox启动参数，禁用ssl，方便nginx代理，改成只监听localhost</li>
-</ol>
-<p>vim &#x2F;etc&#x2F;sysconfig&#x2F;shellinabox</p>
-<p>修改OPTS为如下， 加上 –localhost-only -t</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OPTS=<span class="string">&quot;--disable-ssl-menu --localhost-only -t -s /:LOGIN&quot;</span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>nginx配置修改</li>
-</ol>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">location</span><span class="regexp"> ^~/shellinabox/</span> &#123;</span><br><span class="line">       <span class="attribute">proxy_pass</span> http://127.0.0.1:4200/;</span><br><span class="line">       <span class="attribute">proxy_redirect</span> default;</span><br><span class="line"></span><br><span class="line">       <span class="attribute">proxy_set_header</span> Host $host;</span><br><span class="line">       <span class="attribute">proxy_set_header</span> X-Real-IP $remote_addr;</span><br><span class="line">       <span class="attribute">proxy_set_header</span> X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line"></span><br><span class="line">       <span class="attribute">client_max_body_size</span> <span class="number">10m</span>;</span><br><span class="line">       <span class="attribute">client_body_buffer_size</span> <span class="number">128k</span>;</span><br><span class="line"></span><br><span class="line">       <span class="attribute">proxy_connect_timeout</span> <span class="number">90</span>;</span><br><span class="line">       <span class="attribute">proxy_send_timeout</span> <span class="number">90</span>;</span><br><span class="line">       <span class="attribute">proxy_read_timeout</span> <span class="number">90</span>;</span><br><span class="line"></span><br><span class="line">       <span class="attribute">proxy_buffer_size</span> <span class="number">4k</span>;</span><br><span class="line">       <span class="attribute">proxy_buffers</span> <span class="number">4</span> <span class="number">32k</span>;</span><br><span class="line">       <span class="attribute">proxy_busy_buffers_size</span> <span class="number">64k</span>;</span><br><span class="line">       <span class="attribute">proxy_temp_file_write_size</span> <span class="number">64k</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/02/linux/webterminal/shellinabox/" data-id="ckz5mgqkd000sbeoi3o8a8288" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/02/02/linux/centos7/" data-id="ckz5ne7yt000l99oj1e8s9wvm" data-title="centos7" class="article-share-link">Share</a>
       
       
       
@@ -918,23 +1118,23 @@
       <ul>
         
           <li>
-            <a href="/2022/02/02/hello-world/">Hello World</a>
+            <a href="/2022/02/02/linux/clash/">clash</a>
           </li>
         
           <li>
-            <a href="/2022/02/02/devops/VSCode%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/">(no title)</a>
+            <a href="/2022/02/02/linux/dhcp/">dhcp</a>
           </li>
         
           <li>
-            <a href="/2022/02/02/devops/VSCode%E9%85%8D%E7%BD%AEJava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">(no title)</a>
+            <a href="/2022/02/02/linux/redhat7.4%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">Redhat 开发环境配置</a>
           </li>
         
           <li>
-            <a href="/2022/02/02/devops/code-server/">(no title)</a>
+            <a href="/2022/02/02/linux/shc/">shc</a>
           </li>
         
           <li>
-            <a href="/2022/02/02/devops/dcoker/">(no title)</a>
+            <a href="/2022/02/02/linux/shell/">shell</a>
           </li>
         
       </ul>

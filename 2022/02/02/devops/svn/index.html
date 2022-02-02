@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>svn | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="svn[TOC] 基本使用svn import把现有的项目导入到仓库中 1svn import &#x2F;myproject https:&#x2F;&#x2F;svn.example.com&#x2F;svn&#x2F;repo&#x2F;project1  svn list查看仓库文件 1svn list https:&#x2F;&#x2F;svn.example.com&#x2F;svn&#x2F;project1  svn checkout创建一个工作副本 1svn checkout">
+<meta property="og:type" content="article">
+<meta property="og:title" content="svn">
+<meta property="og:url" content="http://example.com/2022/02/02/devops/svn/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="svn[TOC] 基本使用svn import把现有的项目导入到仓库中 1svn import &#x2F;myproject https:&#x2F;&#x2F;svn.example.com&#x2F;svn&#x2F;repo&#x2F;project1  svn list查看仓库文件 1svn list https:&#x2F;&#x2F;svn.example.com&#x2F;svn&#x2F;project1  svn checkout创建一个工作副本 1svn checkout">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-02T14:31:24.860Z">
+<meta property="article:modified_time" content="2022-02-02T14:31:24.860Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-devops/svn" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/02/devops/svn/" class="article-date">
+  <time class="dt-published" datetime="2022-02-02T14:31:24.860Z" itemprop="datePublished">2022-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      svn
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="svn"><a href="#svn" class="headerlink" title="svn"></a>svn</h1><p>[TOC]</p>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><h3 id="svn-import"><a href="#svn-import" class="headerlink" title="svn import"></a>svn import</h3><p>把现有的项目导入到仓库中</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn import /myproject https://svn.example.com/svn/repo/project1</span><br></pre></td></tr></table></figure>
+
+<h3 id="svn-list"><a href="#svn-list" class="headerlink" title="svn list"></a>svn list</h3><p>查看仓库文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn list https://svn.example.com/svn/project1</span><br></pre></td></tr></table></figure>
+
+<h3 id="svn-checkout"><a href="#svn-checkout" class="headerlink" title="svn checkout"></a>svn checkout</h3><p>创建一个工作副本</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn checkout https://svn.example.com/svn/project1/trunk</span><br></pre></td></tr></table></figure>
+
+<h3 id="基本工作流"><a href="#基本工作流" class="headerlink" title="基本工作流"></a>基本工作流</h3><h4 id="svn-update"><a href="#svn-update" class="headerlink" title="svn update"></a>svn update</h4><p>拉取项目的最新更行</p>
+<h4 id="svn-add-svn-delete-svn-copy-svn-move"><a href="#svn-add-svn-delete-svn-copy-svn-move" class="headerlink" title="svn add, svn delete, svn copy, svn move"></a>svn add, svn delete, svn copy, svn move</h4><p>项目编辑，更改等操作</p>
+<h4 id="svn-status-svn-diff"><a href="#svn-status-svn-diff" class="headerlink" title="svn status, svn diff"></a>svn status, svn diff</h4><p>查看更改内容</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ svn status</span><br><span class="line">? scratch.c</span><br><span class="line">A stuff/loot</span><br><span class="line">A stuff/loot/new.c</span><br><span class="line">D stuff/old.c</span><br><span class="line">M bar.c</span><br></pre></td></tr></table></figure>
+
+<p>?  item</p>
+<p>​    没有加入版本控制的文件</p>
+<p>A item</p>
+<p>​    加如到仓库的文件，svn add的结果， svn commit后才生效</p>
+<p>C item</p>
+<p>​    冲突</p>
+<p>D item</p>
+<p>​    从仓库删除的文件， svn delete的结果，svn commit才生效</p>
+<p>M item</p>
+<p>​    被改变的文件</p>
+<h4 id="svn-revert"><a href="#svn-revert" class="headerlink" title="svn revert"></a>svn revert</h4><p>回退错误的更改</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ svn status README</span><br><span class="line">M README</span><br><span class="line">$ svn revert README</span><br><span class="line">Reverted <span class="string">&#x27;README&#x27;</span></span><br><span class="line">$ svn status README</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+
+<h4 id="svn-update-svn-resolve"><a href="#svn-update-svn-resolve" class="headerlink" title="svn update, svn resolve"></a>svn update, svn resolve</h4><h4 id="svn-commit"><a href="#svn-commit" class="headerlink" title="svn commit"></a>svn commit</h4><h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><h3 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ svn copy http://svn.example.com/repos/calc/trunk \</span><br><span class="line">http://svn.example.com/repos/calc/branches/my-calc-branch \</span><br><span class="line">-m <span class="string">&quot;Creating a private branch of /calc/trunk.&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="在分支上工作"><a href="#在分支上工作" class="headerlink" title="在分支上工作"></a>在分支上工作</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn checkout http://svn.example.com/repos/calc/branches/my-calc-branch</span><br></pre></td></tr></table></figure>
+
+<h3 id="保持分支同步"><a href="#保持分支同步" class="headerlink" title="保持分支同步:"></a>保持分支同步:</h3><p>将主干的修改同步到分支</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/home/user/my-calc-branch</span><br><span class="line">$ svn merge ^/calc/trunk</span><br><span class="line">--- Merging r345 through r356 into <span class="string">&#x27;.&#x27;</span>:</span><br><span class="line">U button.c</span><br><span class="line">U integer.c</span><br><span class="line">--- Recording mergeinfo <span class="keyword">for</span> merge of r345 through r356 into <span class="string">&#x27;.&#x27;</span>:</span><br><span class="line">U .</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+
+<h3 id="将分支修改合并到主干"><a href="#将分支修改合并到主干" class="headerlink" title="将分支修改合并到主干"></a>将分支修改合并到主干</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/home/user/calc-trunk</span><br><span class="line">$ svn update <span class="comment"># (make sure the working copy is up to date)</span></span><br><span class="line">Updating <span class="string">&#x27;.&#x27;</span>:</span><br><span class="line">At revision 390.</span><br><span class="line">$ svn merge --reintegrate ^/calc/branches/my-calc-branch</span><br><span class="line">--- Merging differences between repository URLs into <span class="string">&#x27;.&#x27;</span>:</span><br><span class="line">U button.c</span><br><span class="line">U integer.c</span><br><span class="line">U Makefile</span><br><span class="line">--- Recording mergeinfo <span class="keyword">for</span> merge between repository URLs into <span class="string">&#x27;.&#x27;</span>:</span><br><span class="line">U .</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ <span class="comment"># build, test, verify, ...</span></span><br><span class="line">$ svn commit -m <span class="string">&quot;Merge my-calc-branch back into trunk!&quot;</span></span><br><span class="line">Sending .</span><br><span class="line">Sending button.c</span><br><span class="line">Sending integer.c</span><br><span class="line">Sending Makefile</span><br><span class="line">Transmitting file data ..</span><br><span class="line">Committed revision 391.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ svn delete ^/calc/branches/my-calc-branch \</span><br><span class="line">-m <span class="string">&quot;Remove my-calc-branch, reintegrated with trunk in r391.&quot;</span></span><br><span class="line">Committed revision 392.</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="svn仓库管理"><a href="#svn仓库管理" class="headerlink" title="svn仓库管理"></a>svn仓库管理</h2><h3 id="svn-仓库构成"><a href="#svn-仓库构成" class="headerlink" title="svn 仓库构成"></a>svn 仓库构成</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls repos</span><br><span class="line">conf/	db/  format/  hooks/  locks/  README.txt	</span><br></pre></td></tr></table></figure>
+
+<p>conf&#x2F;</p>
+<p>​        各种配置文件</p>
+<p>db&#x2F;</p>
+<p>​        版本控制的文件</p>
+<p>format</p>
+<p>​        描述仓库的结构</p>
+<p>hooks&#x2F;</p>
+<p>​        钩子脚本</p>
+<p>locks&#x2F;</p>
+<p>​        管理被锁的文件，访问控制</p>
+<p>README.txt</p>
+<p>​        简单说明</p>
+<h3 id="推荐的项目结构"><a href="#推荐的项目结构" class="headerlink" title="推荐的项目结构"></a>推荐的项目结构</h3><p>&#x2F;</p>
+<p>​    project&#x2F;</p>
+<p>​            trunk&#x2F; (主要开发)</p>
+<p>​            tags&#x2F; （快照，从不改变的）</p>
+<p>​            branches&#x2F; (主要开发的分支)</p>
+<h3 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h3><ul>
+<li>Berkeley DB</li>
+<li>FSFS（推荐）</li>
+</ul>
+<h3 id="创建和配置仓库"><a href="#创建和配置仓库" class="headerlink" title="创建和配置仓库"></a>创建和配置仓库</h3><h4 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svnadmin create /var/svn/repos</span><br></pre></td></tr></table></figure>
+
+<h4 id="实现钩子"><a href="#实现钩子" class="headerlink" title="实现钩子"></a>实现钩子</h4><p>pre-hooks</p>
+<p>post-hooks</p>
+<p>推荐实现方式：从现有模板copy一份修改</p>
+<blockquote>
+<p>注意：钩子的执行环境没有任何环境变量，所以都需要手动指定</p>
+</blockquote>
+<h3 id="仓库维护"><a href="#仓库维护" class="headerlink" title="仓库维护"></a>仓库维护</h3><h4 id="svnadmin"><a href="#svnadmin" class="headerlink" title="svnadmin"></a>svnadmin</h4><p>最基础的管理工具，包括仓库的创建等</p>
+<h4 id="svnlook"><a href="#svnlook" class="headerlink" title="svnlook"></a>svnlook</h4><p>查看仓库的不同版本和事务，不会修改仓库</p>
+<h4 id="svndumpfilter"><a href="#svndumpfilter" class="headerlink" title="svndumpfilter"></a>svndumpfilter</h4><p>仓库清理工具</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">svndumpfilter exclude</span><br><span class="line">svndumpfilter include</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="svnrdump"><a href="#svnrdump" class="headerlink" title="svnrdump"></a>svnrdump</h4><h4 id="svnsync"><a href="#svnsync" class="headerlink" title="svnsync"></a>svnsync</h4><p>同步一个只读的镜像仓库</p>
+<h3 id="仓库配置"><a href="#仓库配置" class="headerlink" title="仓库配置"></a>仓库配置</h3><h4 id="svnserve"><a href="#svnserve" class="headerlink" title="svnserve"></a>svnserve</h4><p>最快，最简单</p>
+<p>安全性不高，如果只是在局域网内使用够了</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 服务端开始svn进程</span><br><span class="line">svnserv -d -r /var/svn</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 客户端使用</span><br><span class="line">svn checkout svn://host.example.com/project1</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="svnserve-over-ssh"><a href="#svnserve-over-ssh" class="headerlink" title="svnserve over ssh"></a>svnserve over ssh</h4><h4 id="The-apache-http-server"><a href="#The-apache-http-server" class="headerlink" title="The apache http server"></a>The apache http server</h4><p>有https加密，有apach日志系统</p>
+<p>大项目，需要连接到互联网用这个</p>
+<p>前提：httpd, mode_dav_svn</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/02/devops/svn/" data-id="ckz5ne7yp000e99ojfvme3cx1" data-title="svn" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/02/devops/ssh%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ssh 端口转发
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/02/02/linux/HelloOS/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">HelloOS</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/02/linux/clash/">clash</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/linux/dhcp/">dhcp</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/linux/redhat7.4%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">Redhat 开发环境配置</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/linux/shc/">shc</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/02/linux/shell/">shell</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
